@@ -7,6 +7,16 @@ public class Customer {
 	private String name;
 	private Address address;
 	
+	//Constructor
+	public Customer(String customerCode, String type, Person person, String name, Address address) {
+		super();
+		this.customerCode = customerCode;
+		this.type = type;
+		this.person = person;
+		this.name = name;
+		this.address = address;
+	}
+	
 	//Getter/Setter for customerCode
 	public String getCustomerCode() {
 		return this.customerCode;
@@ -21,6 +31,14 @@ public class Customer {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	//Getter/Setter for person
+	public Person getPerson() {
+		return this.person;
+	}
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 	
 	//Getter/Setter for name

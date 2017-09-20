@@ -6,6 +6,15 @@ public class Person {
 	private String lastName;
 	private Address address;
 	
+	//Constructor
+	public Person(String personCode, String firstName, String lastName, Address address) {
+		super();
+		this.personCode = personCode;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+	}
+	
 	//Getter/Setter for personCode
 	public String getPersonCode() {
 		return this.personCode;
