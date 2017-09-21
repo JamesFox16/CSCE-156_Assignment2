@@ -1,5 +1,5 @@
 
-public class Customer {
+public class Customer extends Person{
 	
 	private String customerCode;
 	private String type;
@@ -9,7 +9,7 @@ public class Customer {
 	
 	//Constructor
 	public Customer(String customerCode, String type, Person person, String name, Address address) {
-		super();
+		super(customerCode, name, address);
 		this.customerCode = customerCode;
 		this.type = type;
 		this.person = person;

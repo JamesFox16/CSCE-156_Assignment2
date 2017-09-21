@@ -1,8 +1,2 @@
-/Person.class
-/Customer.class
-/Product.class
-/CustomerCreater.class
-/Product$MovieTicket.class
-/Product$ParkingPass.class
-/Product$Refreshments.class
-/Product$SeasonPass.class
+/XMLWriter.class
+/CustomerCreator.class

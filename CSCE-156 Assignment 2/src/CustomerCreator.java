@@ -5,10 +5,16 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class CustomerCreater {
+public class CustomerCreator {
 	
 	private List<Person> personList = new ArrayList<Person>();
 	private List<Customer> customerList = new ArrayList<Customer>();
+	XMLWriter xmlw = new XMLWriter();
+	JsonWriter jsonw = new JsonWriter();
+	
+	public CustomerCreator() {
+		
+	}
 	
 	//Create a list of Person objects
 	public List<Person> createPersonList() throws IOException{
@@ -24,29 +30,37 @@ public class CustomerCreater {
 				if(info.length == 4) { //Email not yet included in Person class
 					String personCode = info[0];
 					String name[] = info[1].split(",");
-						String first = name[0];
-						String last = name[1];
+					String first = name[0];
+					String last = name[1];
 					String addr[] = info[2].split(",");
-						Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
+					String nameFormat = last+", "+first;
+					Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
 					String email[] = info[3].split(",");
-					
-					Person p = new Person(personCode,first,last,address);
+					ArrayList<String> emails = new ArrayList<String>();
+					for(int i=0; i<email.length; i++) {
+						emails.add(email[i]);
+					}
+					Person p = new Person(personCode, nameFormat, address);
+					p.setEmailAddress(emails);
 					personList.add(p);
 				}
 				else {
 					String personCode = info[0];
 					String name[] = info[1].split(",");
-						String first = name[0];
-						String last = name[1];
+					String first = name[0];
+					String last = name[1];
 					String addr[] = info[2].split(",");
-						Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
+					String nameFormat = last+", "+first;
+					Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
 
-					Person p = new Person(personCode,first,last,address);
+					Person p = new Person(personCode, nameFormat, address);
 					personList.add(p);
 				}
 			}
 			
 			br.close();
+			xmlw.xmlConverter(personList);
+			jsonw.jsonConverter(personList);
 			return personList;
 			
 		}catch(FileNotFoundException e) {

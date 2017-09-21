@@ -1,17 +1,16 @@
+import java.util.ArrayList;
 
 public class Person {
 	
 	private String personCode;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private Address address;
+	private ArrayList<String> emails;
 	
 	//Constructor
-	public Person(String personCode, String firstName, String lastName, Address address) {
-		super();
+	public Person(String personCode, String name, Address address) {
 		this.personCode = personCode;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.address = address;
 	}
 	
@@ -25,18 +24,10 @@ public class Person {
 	
 	//Getter/Setter for firstName
 	public String getFirstName() {
-		return this.firstName;
+		return this.name;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
-	//Getter/Setter for lastName
-	public String getLastName() {
-		return this.lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setFirstName(String name) {
+		this.name = name;
 	}
 	
 	//Getter/Setter for address
@@ -45,6 +36,14 @@ public class Person {
 	}
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	
+	public ArrayList<String> getEmailAddress() {
+		return emails;
+	}
+	
+	public void setEmailAddress(ArrayList<String> emails) {
+		this.emails = emails;
 	}
 
 }
