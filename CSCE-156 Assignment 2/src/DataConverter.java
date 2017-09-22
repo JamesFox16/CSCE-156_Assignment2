@@ -9,8 +9,8 @@ public class DataConverter {
 		FlatFileReader ffr = new FlatFileReader();
 		
 		// Storing the lists that were created with FlatFileReader
-		List<Customer> c = ffr.createCustomerList();
 		List<Person> per = ffr.createPersonList();
+		List<Customer> c = ffr.createCustomerList();
 		List<Product> pro = ffr.createProductList();
 
 		// Writing to .xml

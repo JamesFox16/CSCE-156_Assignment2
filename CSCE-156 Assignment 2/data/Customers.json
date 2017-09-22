@@ -1,6 +1,23 @@
 {
   "customerCode": "C001",
   "type": "G",
+  "person": {
+    "personCode": "231",
+    "name": "Tom, Baker",
+    "address": {
+      "street": "1 Blue Jays Way",
+      "city": " Toronto",
+      "state": " ON",
+      "zip": " M5V 1J1",
+      "country": " Canada"
+    },
+    "emails": [
+      "famousdoc@who.com",
+      "tbaker@cse.unl.edu",
+      "mostfamous@whovian.com",
+      "thedoctor@bbc.com"
+    ]
+  },
   "name": "Clark Consultants",
   "address": {
     "street": "259 Concorde Suites",
@@ -8,12 +25,26 @@
     "state": "NE",
     "zip": "68588-0115",
     "country": "USA"
-  },
-  "primaryContact": "231"
+  }
 }
 {
   "customerCode": "C002",
   "type": "S",
+  "person": {
+    "personCode": "944c",
+    "name": " Starlin, Castro",
+    "address": {
+      "street": "1060 West Addison Street",
+      "city": "Chicago",
+      "state": "IL",
+      "zip": "60613",
+      "country": "USA"
+    },
+    "emails": [
+      "scastro@cubs.com",
+      "starlin_castro13@gmail.com"
+    ]
+  },
   "name": "CAS International Fellows",
   "address": {
     "street": "1223 Oldfather Hall",
@@ -21,12 +52,26 @@
     "state": "NE",
     "zip": "68503",
     "country": "USA"
-  },
-  "primaryContact": "944c"
+  }
 }
 {
   "customerCode": "C003",
   "type": "S",
+  "person": {
+    "personCode": "306a",
+    "name": " Brock, Sampson",
+    "address": {
+      "street": "123 N 1st Street",
+      "city": "Omaha",
+      "state": "NE",
+      "zip": "68116",
+      "country": "USA"
+    },
+    "emails": [
+      "brock_f_sampson@gmail.com",
+      "bsampson@venture.com"
+    ]
+  },
   "name": "Valueless Club",
   "address": {
     "street": "123 Venture Way",
@@ -34,12 +79,26 @@
     "state": "CA",
     "zip": "90230",
     "country": "USA"
-  },
-  "primaryContact": "306a"
+  }
 }
 {
   "customerCode": "C004",
   "type": "G",
+  "person": {
+    "personCode": "321f",
+    "name": " Bud, Fox",
+    "address": {
+      "street": "321 Bronx Street",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10004",
+      "country": "USA"
+    },
+    "emails": [
+      "bfox@gmail.com",
+      "csheen@crazy.net"
+    ]
+  },
   "name": "Stony Brook",
   "address": {
     "street": "9800 Savage Rd",
@@ -47,12 +106,22 @@
     "state": "MD",
     "zip": "20755",
     "country": "USA"
-  },
-  "primaryContact": "321f"
+  }
 }
 {
   "customerCode": "C005",
   "type": "G",
+  "person": {
+    "personCode": "bbchar",
+    "name": " Kaylee, Ehrmantraut",
+    "address": {
+      "street": "800 West 7th Street",
+      "city": " Albuquerque",
+      "state": " NM",
+      "zip": " 87105",
+      "country": "USA"
+    }
+  },
   "name": "Hewlett Industries",
   "address": {
     "street": "1060 West Addison",
@@ -60,12 +129,25 @@
     "state": "IL",
     "zip": "60601",
     "country": "USA"
-  },
-  "primaryContact": "bbchar"
+  }
 }
 {
   "customerCode": "C006",
   "type": "S",
+  "person": {
+    "personCode": "321dr",
+    "name": " C., Baker",
+    "address": {
+      "street": "Avery Hall",
+      "city": "Lincoln",
+      "state": "NE",
+      "zip": "68503",
+      "country": "USA"
+    },
+    "emails": [
+      "dr@baker.com"
+    ]
+  },
   "name": "Gregory Smith",
   "address": {
     "street": "456 West 7th St.",
@@ -73,6 +155,5 @@
     "state": "NE",
     "zip": "68500",
     "country": "USA"
-  },
-  "primaryContact": "321dr"
+  }
 }

@@ -90,7 +90,7 @@ public class FlatFileReader {
 				Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
 				Person p = findPerson(primaryContact);
 				
-				Customer c = new Customer(customerCode, type, p, name, address, primaryContact);
+				Customer c = new Customer(customerCode, type, p, name, address);
 				customerList.add(c);
 			}
 			

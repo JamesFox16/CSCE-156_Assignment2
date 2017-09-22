@@ -9,14 +9,14 @@ public class Customer {
 	private String primaryContact;
 	
 	//Constructor
-	public Customer(String customerCode, String type, Person person, String name, Address address, String primaryContact) {
+	public Customer(String customerCode, String type, Person person, String name, Address address) {
 		//super(customerCode, name, address);
 		this.customerCode = customerCode;
 		this.type = type;
 		this.person = person;
 		this.name = name;
 		this.address = address;
-		this.primaryContact = primaryContact;
+		//this.primaryContact = primaryContact;
 	}
 	
 	//Getter/Setter for customerCode
