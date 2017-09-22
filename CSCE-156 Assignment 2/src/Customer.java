@@ -6,17 +6,17 @@ public class Customer {
 	private Person person;
 	private String name;
 	private Address address;
-	//private String primaryContact;
+	private String primaryContact;
 	
 	//Constructor
-	public Customer(String customerCode, String type, Person person, String name, Address address) {
+	public Customer(String customerCode, String type, Person person, String name, Address address, String primaryContact) {
 		//super(customerCode, name, address);
 		this.customerCode = customerCode;
 		this.type = type;
 		this.person = person;
 		this.name = name;
 		this.address = address;
-		//this.primaryContact = primaryContact;
+		this.primaryContact = primaryContact;
 	}
 	
 	//Getter/Setter for customerCode

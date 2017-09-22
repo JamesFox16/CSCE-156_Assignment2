@@ -9,6 +9,7 @@ import com.google.gson.GsonBuilder;
 
 public class JsonWriter {
 	
+	// Method to convert Person list into json file
 	public void jsonConverterPerson(List<Person> persons) {
 		
 		//Gson gson = new Gson();
@@ -23,6 +24,7 @@ public class JsonWriter {
 			e.printStackTrace();
 		} 
 		
+		// Loop to go through all persons in the list.
 		for(Person aPerson : persons) {
 			// Use toJson method to convert Person object into a String
 			
@@ -33,6 +35,7 @@ public class JsonWriter {
 		jsonPrintWriter.close();
 	}
 	
+	// Method to convert Customer list into json file
 	public void jsonConverterCustomer(List<Customer> customers) {
 		
 		//Gson gson = new Gson();
@@ -47,6 +50,7 @@ public class JsonWriter {
 			e.printStackTrace();
 		} 
 		
+		// Loop to go through all customers in the list.
 		for(Customer aCustomer : customers) {
 			// Use toJson method to convert Customer object into a String
 			
@@ -55,5 +59,28 @@ public class JsonWriter {
 		}
 		
 		jsonPrintWriter.close();
+	}
+	
+	// Method to convert Product list into json file
+	public void jsonConverterProduct(List<Product> products) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		File jsonOutput = new File("data/Products.json");
+		
+		PrintWriter jsonPrintWriter = null;
+		
+		try {
+			jsonPrintWriter = new PrintWriter(jsonOutput);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		// Loop to go through all products in the list.
+		for(Product aProduct : products) {
+			String productOutput = gson.toJson(aProduct);
+			jsonPrintWriter.write(productOutput+"\n");
+			
+		}
+		jsonPrintWriter.close();
+		
 	}
 }

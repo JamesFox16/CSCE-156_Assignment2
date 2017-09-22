@@ -8,7 +8,8 @@
     "state": "NE",
     "zip": "68588-0115",
     "country": "USA"
-  }
+  },
+  "primaryContact": "231"
 }
 {
   "customerCode": "C002",
@@ -20,7 +21,8 @@
     "state": "NE",
     "zip": "68503",
     "country": "USA"
-  }
+  },
+  "primaryContact": "944c"
 }
 {
   "customerCode": "C003",
@@ -32,7 +34,8 @@
     "state": "CA",
     "zip": "90230",
     "country": "USA"
-  }
+  },
+  "primaryContact": "306a"
 }
 {
   "customerCode": "C004",
@@ -44,7 +47,8 @@
     "state": "MD",
     "zip": "20755",
     "country": "USA"
-  }
+  },
+  "primaryContact": "321f"
 }
 {
   "customerCode": "C005",
@@ -56,7 +60,8 @@
     "state": "IL",
     "zip": "60601",
     "country": "USA"
-  }
+  },
+  "primaryContact": "bbchar"
 }
 {
   "customerCode": "C006",
@@ -68,5 +73,6 @@
     "state": "NE",
     "zip": "68500",
     "country": "USA"
-  }
+  },
+  "primaryContact": "321dr"
 }

@@ -10,7 +10,9 @@
     <zip>68588-0115</zip>
     <country>USA</country>
   </address>
-</Customer><Customer>
+  <primaryContact>231</primaryContact>
+</Customer>
+<Customer>
   <customerCode>C002</customerCode>
   <type>S</type>
   <name>CAS International Fellows</name>
@@ -21,7 +23,9 @@
     <zip>68503</zip>
     <country>USA</country>
   </address>
-</Customer><Customer>
+  <primaryContact>944c</primaryContact>
+</Customer>
+<Customer>
   <customerCode>C003</customerCode>
   <type>S</type>
   <name>Valueless Club</name>
@@ -32,7 +36,9 @@
     <zip>90230</zip>
     <country>USA</country>
   </address>
-</Customer><Customer>
+  <primaryContact>306a</primaryContact>
+</Customer>
+<Customer>
   <customerCode>C004</customerCode>
   <type>G</type>
   <name>Stony Brook</name>
@@ -43,7 +49,9 @@
     <zip>20755</zip>
     <country>USA</country>
   </address>
-</Customer><Customer>
+  <primaryContact>321f</primaryContact>
+</Customer>
+<Customer>
   <customerCode>C005</customerCode>
   <type>G</type>
   <name>Hewlett Industries</name>
@@ -54,7 +62,9 @@
     <zip>60601</zip>
     <country>USA</country>
   </address>
-</Customer><Customer>
+  <primaryContact>bbchar</primaryContact>
+</Customer>
+<Customer>
   <customerCode>C006</customerCode>
   <type>S</type>
   <name>Gregory Smith</name>
@@ -65,4 +75,5 @@
     <zip>68500</zip>
     <country>USA</country>
   </address>
+  <primaryContact>321dr</primaryContact>
 </Customer>

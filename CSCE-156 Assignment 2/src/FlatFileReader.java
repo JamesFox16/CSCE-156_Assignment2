@@ -5,17 +5,18 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class CustomerCreator {
+public class FlatFileReader {
 	
+	// Creating the lists that will be used and returned.
 	private List<Person> personList = new ArrayList<Person>();
 	private List<Customer> customerList = new ArrayList<Customer>();
 	private List<Product> productList = new ArrayList<Product>();
-	XMLWriter xmlw = new XMLWriter();
-	JsonWriter jsonw = new JsonWriter();
 	
-	public CustomerCreator() {
+	// Default constructor 
+	public FlatFileReader() {
 		
 	}
+	
 	
 	//Create a list of Person objects
 	public List<Person> createPersonList() throws IOException{
@@ -27,8 +28,9 @@ public class CustomerCreator {
 			while(br.ready()) {
 				String line = br.readLine();
 				String info[] = line.split(";");
-				
-				if(info.length == 4) { //Email not yet included in Person class
+				// If else statements determining format that will be used 
+				// when creating the objects.
+				if(info.length == 4) {
 					String personCode = info[0];
 					String name[] = info[1].split(",");
 					String first = name[0];
@@ -45,7 +47,7 @@ public class CustomerCreator {
 					p.setEmailAddress(emails);
 					personList.add(p);
 				}
-				else {
+				else if (info.length==3){
 					String personCode = info[0];
 					String name[] = info[1].split(",");
 					String first = name[0];
@@ -56,12 +58,12 @@ public class CustomerCreator {
 
 					Person p = new Person(personCode, nameFormat, address);
 					personList.add(p);
+				}else {
+					//Bad formating
 				}
 			}
 			
 			br.close();
-			xmlw.xmlConverterPerson(personList);
-			jsonw.jsonConverterPerson(personList);
 			return personList;
 			
 		}catch(FileNotFoundException e) {
@@ -80,87 +82,20 @@ public class CustomerCreator {
 			while(br.ready()) {
 				String line = br.readLine();
 				String info[] = line.split(";");
-				
 				String customerCode = info[0];
 				String type = info[1];
 				String primaryContact = info[2];
 				String name = info[3];
 				String addr[] = info[4].split(",");
-					Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
-				
+				Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
 				Person p = findPerson(primaryContact);
 				
-				Customer c = new Customer(customerCode, type, p, name, address);
-				
+				Customer c = new Customer(customerCode, type, p, name, address, primaryContact);
 				customerList.add(c);
 			}
 			
 			br.close();
-			xmlw.xmlConverterCustomer(customerList);
-			jsonw.jsonConverterCustomer(customerList); //primaryContact to Person link not working?
 			return customerList;
-		}catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	//Create a list of Product objects
-	public List<Product> createProductList() throws IOException{
-		
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("data/Products.dat"));
-			br.readLine();
-			
-			while(br.ready()) {
-				String line = br.readLine();
-				String info[] = line.split(";"); //No Product constructors have been written yet
-				
-				if(info.length == 7) { //Movie Ticket
-					String code = info[0];
-					String type = info[1];
-					String dateTime = info[2];
-					String movieName = info[3];
-					String addr[] = info[4].split(",");
-						Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
-					String screenNumber = info[5];
-					String pricePerUnit = info[6];
-					
-					Product p = new Product(code,type,dateTime,movieName,address,screenNumber,pricePerUnit);
-					productList.add(p);
-					
-				}else if(info.length == 6) { //Season Pass
-					String code = info[0];
-					String type = info[1];
-					String name = info[2];
-					String startDate = info[3];
-					String endDate = info[4];
-					String cost = info[5];
-					
-					Product p = new Product(code,type,name,startDate,endDate,cost);
-					productList.add(p);
-					
-				}else if(info.length == 3) { //Parking Pass
-					String code = info[0];
-					String type = info[1];
-					String parkingFee = info[2];
-					
-					Product p = new Product(code,type,parkingFee);
-					productList.add(p);
-					
-				}else if(info.length == 4) { //Refreshments
-					String code = info[0];
-					String type = info[1];
-					String name = info[2];
-					String cost = info[3];
-					
-					Product p = new Product(code,type,name,cost);
-					productList.add(p);
-					
-				}
-			}
-			//XML/JSON writers for Products go here
-			br.close();
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -175,6 +110,70 @@ public class CustomerCreator {
 			}
 		}
 		return null;
+	}
+	
+	//Create a list of Product objects
+	public List<Product> createProductList() throws IOException{
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("data/Products.dat"));
+			br.readLine();
+		
+			while(br.ready()) {
+				String line = br.readLine();
+				String info[] = line.split(";");
+			
+				// If else statements determining format that will be used 
+				// when creating the objects.
+				if(info.length == 7) { //Movie Ticket
+					String productCode = info[0];
+					String productType = info[1];
+					String dateTime = info[2];
+					String name = info[3];
+					String addr[] = info[4].split(",");
+					Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
+					String screenNumber = info[5];
+					double unitPrice = Double.parseDouble(info[6]);
+				
+					MovieTicket m = new MovieTicket(productCode, productType, dateTime, name, address, screenNumber, unitPrice);
+					productList.add(m);
+				
+				}else if(info.length == 6) { //Season Pass
+					String productCode = info[0];
+					String productType = info[1];
+					String name = info[2];
+					String dateTime = info[3];
+					String endDate = info[4];
+					double unitPrice = Double.parseDouble(info[5]);
+				
+					SeasonPass sp = new SeasonPass(productCode, productType, name, dateTime, endDate, unitPrice);
+					productList.add(sp);
+				
+				}else if(info.length == 3) { //Parking Pass
+					String productCode = info[0];
+					String productType = info[1];
+					double unitPrice = Double.parseDouble(info[2]);
+				
+					ParkingPass pp = new ParkingPass(productCode, productType, unitPrice);
+					productList.add(pp);
+				
+				}else if(info.length == 4) { //Refreshments
+					String productCode = info[0];
+					String productType = info[1];
+					String name = info[2];
+					double unitPrice = Double.parseDouble(info[3]);
+				
+					Refreshments r = new Refreshments(productCode, productType, name, unitPrice);
+					productList.add(r);
+				
+				}
+			}
+			br.close();
+			return productList;
+			}catch(FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			return null;
 	}
 
 }
