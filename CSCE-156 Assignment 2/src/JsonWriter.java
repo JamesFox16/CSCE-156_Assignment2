@@ -9,8 +9,7 @@ import com.google.gson.GsonBuilder;
 
 public class JsonWriter {
 	
-	
-	public void jsonConverter(List<Person> persons) {
+	public void jsonConverterPerson(List<Person> persons) {
 		
 		//Gson gson = new Gson();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -29,6 +28,30 @@ public class JsonWriter {
 			
 			String personOutput = gson.toJson(aPerson); 
 			jsonPrintWriter.write(personOutput + "\n");
+		}
+		
+		jsonPrintWriter.close();
+	}
+	
+	public void jsonConverterCustomer(List<Customer> customers) {
+		
+		//Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		File jsonOutput = new File("data/Customers.json");
+		
+		PrintWriter jsonPrintWriter = null;
+		
+		try {
+			jsonPrintWriter = new PrintWriter(jsonOutput);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} 
+		
+		for(Customer aCustomer : customers) {
+			// Use toJson method to convert Customer object into a String
+			
+			String customerOutput = gson.toJson(aCustomer); 
+			jsonPrintWriter.write(customerOutput + "\n");
 		}
 		
 		jsonPrintWriter.close();

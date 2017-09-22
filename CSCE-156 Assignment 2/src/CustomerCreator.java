@@ -9,6 +9,7 @@ public class CustomerCreator {
 	
 	private List<Person> personList = new ArrayList<Person>();
 	private List<Customer> customerList = new ArrayList<Customer>();
+	private List<Product> productList = new ArrayList<Product>();
 	XMLWriter xmlw = new XMLWriter();
 	JsonWriter jsonw = new JsonWriter();
 	
@@ -59,8 +60,8 @@ public class CustomerCreator {
 			}
 			
 			br.close();
-			xmlw.xmlConverter(personList);
-			jsonw.jsonConverter(personList);
+			xmlw.xmlConverterPerson(personList);
+			jsonw.jsonConverterPerson(personList);
 			return personList;
 			
 		}catch(FileNotFoundException e) {
@@ -95,7 +96,71 @@ public class CustomerCreator {
 			}
 			
 			br.close();
+			xmlw.xmlConverterCustomer(customerList);
+			jsonw.jsonConverterCustomer(customerList); //primaryContact to Person link not working?
 			return customerList;
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//Create a list of Product objects
+	public List<Product> createProductList() throws IOException{
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("data/Products.dat"));
+			br.readLine();
+			
+			while(br.ready()) {
+				String line = br.readLine();
+				String info[] = line.split(";"); //No Product constructors have been written yet
+				
+				if(info.length == 7) { //Movie Ticket
+					String code = info[0];
+					String type = info[1];
+					String dateTime = info[2];
+					String movieName = info[3];
+					String addr[] = info[4].split(",");
+						Address address = new Address(addr[0],addr[1],addr[2],addr[3],addr[4]);
+					String screenNumber = info[5];
+					String pricePerUnit = info[6];
+					
+					Product p = new Product(code,type,dateTime,movieName,address,screenNumber,pricePerUnit);
+					productList.add(p);
+					
+				}else if(info.length == 6) { //Season Pass
+					String code = info[0];
+					String type = info[1];
+					String name = info[2];
+					String startDate = info[3];
+					String endDate = info[4];
+					String cost = info[5];
+					
+					Product p = new Product(code,type,name,startDate,endDate,cost);
+					productList.add(p);
+					
+				}else if(info.length == 3) { //Parking Pass
+					String code = info[0];
+					String type = info[1];
+					String parkingFee = info[2];
+					
+					Product p = new Product(code,type,parkingFee);
+					productList.add(p);
+					
+				}else if(info.length == 4) { //Refreshments
+					String code = info[0];
+					String type = info[1];
+					String name = info[2];
+					String cost = info[3];
+					
+					Product p = new Product(code,type,name,cost);
+					productList.add(p);
+					
+				}
+			}
+			//XML/JSON writers for Products go here
+			br.close();
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}

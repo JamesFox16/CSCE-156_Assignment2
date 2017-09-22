@@ -1,20 +1,22 @@
 
-public class Customer extends Person{
+public class Customer {
 	
 	private String customerCode;
 	private String type;
 	private Person person;
 	private String name;
 	private Address address;
+	//private String primaryContact;
 	
 	//Constructor
 	public Customer(String customerCode, String type, Person person, String name, Address address) {
-		super(customerCode, name, address);
+		//super(customerCode, name, address);
 		this.customerCode = customerCode;
 		this.type = type;
 		this.person = person;
 		this.name = name;
 		this.address = address;
+		//this.primaryContact = primaryContact;
 	}
 	
 	//Getter/Setter for customerCode
