@@ -11,6 +11,7 @@ public class FlatFileReader {
 	private List<Person> personList = new ArrayList<Person>();
 	private List<Customer> customerList = new ArrayList<Customer>();
 	private List<Product> productList = new ArrayList<Product>();
+	private List<Invoice> invoiceList = new ArrayList<Invoice>();
 	
 	// Default constructor 
 	public FlatFileReader() {
@@ -174,6 +175,62 @@ public class FlatFileReader {
 				e.printStackTrace();
 			}
 			return null;
+	}
+	
+	//Creates a list of invoices each as objects.
+	public List<Invoice> createInvoiceList() throws IOException {
+		//TODO: fill in code here.
+		
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("data/Customers.dat"));
+			br.readLine();
+			
+			while (br.ready()) {
+				String line = br.readLine();
+				String info[] = line.split(";");
+				String invoiceCode = info[0];
+				String customerCode = info[1];
+				String salespersonCode = info[2];
+				String date = info[3];
+				
+				List<Product> productsForInvoice = new ArrayList<Product>();
+				List<String> quantityOfPurchases = new ArrayList<String>();
+				String[] purchases = info[4].split(",");
+				for(int i=0; i<purchases.length; i++) {
+					if (purchases.length == 2) {//Any other product
+						Product product = findProduct(purchases[i+0]);
+						productsForInvoice.add(product);
+						quantityOfPurchases.add(purchases[i+1]);
+						
+					}else if (purchases.length == 3) {//Parking pass
+						Product product = findProduct(purchases[i+0]);
+						productsForInvoice.add(product);
+						quantityOfPurchases.add(purchases[i+1]);
+						// Need to chagnge most of this I just wanted to start working on it.
+						
+					}else {
+						// Error
+					}
+				}
+			}
+			br.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return null;
+	}
+	
+	//Finds a product from the personList based on the personCode
+	public Product findProduct(String productCode) {
+		for(Product p : productList) {
+			if(productCode.equals(p.getProductCode())) {
+				return p;
+			}
+		}
+		return null;
 	}
 
 }
