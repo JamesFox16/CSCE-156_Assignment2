@@ -1,12 +1,19 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.List;
 
-public class Customer {
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+public class Customer{
 	
 	private String customerCode;
 	private String type;
 	private Person person;
 	private String name;
 	private Address address;
-	private String primaryContact;
+	//private String primaryContact;
 	
 	//Constructor
 	public Customer(String customerCode, String type, Person person, String name, Address address) {
@@ -17,6 +24,21 @@ public class Customer {
 		this.name = name;
 		this.address = address;
 		//this.primaryContact = primaryContact;
+	}
+	
+	//At invoice report, multiply subtotal by this method then add together
+	public double computeTax() {
+		return 0;
+	}
+	
+	//At invoice report, multiply subtotal by this method then add together
+	public double computeDiscount() {
+		return 0;
+	}
+	
+	//At invoice report, add this function to total
+	public double addFees() {
+		return 0;
 	}
 	
 	//Getter/Setter for customerCode
@@ -58,5 +80,4 @@ public class Customer {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
 }

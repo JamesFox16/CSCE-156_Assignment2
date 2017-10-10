@@ -183,7 +183,7 @@ public class FlatFileReader {
 		
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("data/Customers.dat"));
+			br = new BufferedReader(new FileReader("data/Invoices.dat"));
 			br.readLine();
 			
 			while (br.ready()) {
@@ -198,7 +198,16 @@ public class FlatFileReader {
 				List<String> quantityOfPurchases = new ArrayList<String>();
 				String[] purchases = info[4].split(",");
 				for(int i=0; i<purchases.length; i++) {
-					if (purchases.length == 2) {//Any other product
+					
+					String[] hold = purchases[i].split(":");
+					String productCode = hold[0];
+					String quantity = hold[1];
+					
+					if(hold.length == 3) {
+						String ticketCode = hold[2];
+					}
+		//Above method should work better
+					/*if (purchases.length == 2) {//Any other product
 						Product product = findProduct(purchases[i+0]);
 						productsForInvoice.add(product);
 						quantityOfPurchases.add(purchases[i+1]);
@@ -207,14 +216,19 @@ public class FlatFileReader {
 						Product product = findProduct(purchases[i+0]);
 						productsForInvoice.add(product);
 						quantityOfPurchases.add(purchases[i+1]);
-						// Need to chagnge most of this I just wanted to start working on it.
+						// Need to change most of this I just wanted to start working on it.
 						
 					}else {
 						// Error
-					}
+					}*/
 				}
+				
+				//Implement quantity of products purchased somehow...
+				Invoice i = new Invoice(invoiceCode, findCustomer(customerCode), findPerson(salespersonCode), date, productsForInvoice);
+				invoiceList.add(i);
 			}
 			br.close();
+			return invoiceList;
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -222,6 +236,16 @@ public class FlatFileReader {
 		}	
 		return null;
 	}
+	
+	//Finds a Customer from the customerList based on the customerCode
+		public Customer findCustomer(String customerCode) {
+			for(Customer c : customerList) {
+				if(customerCode.equals(c.getCustomerCode())) {
+					return c;
+				}
+			}
+			return null;
+		}
 	
 	//Finds a product from the personList based on the personCode
 	public Product findProduct(String productCode) {

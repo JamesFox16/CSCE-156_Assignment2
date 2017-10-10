@@ -7,6 +7,10 @@ public class Refreshments extends Product{
 		this.name = name;
 	}
 	
+	public double computeTax() {
+		return this.getProductPrice() * 0.04;
+	}
+	
 	//Getter/Setter for name
 	public String getName() {
 		return this.name;

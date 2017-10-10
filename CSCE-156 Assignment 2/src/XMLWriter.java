@@ -2,13 +2,15 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.xstream.XStream;
 
-public class XMLWriter {
+public class XMLWriter{
 	
 	private XStream xstream = null;
+	
 	
 	public XMLWriter() {
 		this.xstream = new XStream();
@@ -19,8 +21,7 @@ public class XMLWriter {
 		xstream.alias("unitPrice", Product.class);
 	
 	}
-
-
+	
 	// Method to convert the list of Person objects to XML.
 	public void xmlConverterPerson(List<Person> persons) {
         File xmlOutput = new File("data/Persons.xml");// The location of the data file.
@@ -86,4 +87,5 @@ public class XMLWriter {
 		}
 		xmlPrintWriter.close();
 	}
+	
 }

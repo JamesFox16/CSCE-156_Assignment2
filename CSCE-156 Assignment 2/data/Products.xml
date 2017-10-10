@@ -5,16 +5,16 @@
   <endDate>2017-01-07</endDate>
 </SeasonPass>
 <Refreshments>
-  <name>Labatt Beer-20oz</name>
+  <name>Coors Beer-20oz</name>
 </Refreshments>
 <MovieTicket>
-  <dateTime>2016-10-21 13:10</dateTime>
-  <movieName>A Monster Calls</movieName>
+  <dateTime>2016-11-10 10:00</dateTime>
+  <movieName>IT</movieName>
   <address>
-    <street>3555 South 140th Plaza</street>
-    <city>Omaha</city>
-    <state> NE</state>
-    <zip> 68144</zip>
+    <street>755 Willard Drive</street>
+    <city>Ashwaubenon</city>
+    <state> WI</state>
+    <zip> 54304</zip>
     <country> USA</country>
   </address>
   <screenNumber>2A</screenNumber>
@@ -24,17 +24,17 @@
   <dateTime>2016-09-13 15:30</dateTime>
   <movieName>The Wild Life</movieName>
   <address>
-    <street>755 Willard Drive</street>
-    <city>Ashwaubenon</city>
-    <state> WI</state>
-    <zip> 54304</zip>
+    <street>3555 South 140th Plaza</street>
+    <city>Omaha</city>
+    <state> NE</state>
+    <zip> 68144</zip>
     <country> USA</country>
   </address>
   <screenNumber>12F</screenNumber>
 </MovieTicket>
 <MovieTicket>
-  <dateTime>2016-11-10 10:00</dateTime>
-  <movieName>Shut In</movieName>
+  <dateTime>2016-10-21 13:10</dateTime>
+  <movieName>Inside Out</movieName>
   <address>
     <street>6301 University Ave</street>
     <city>Cedar Falls</city>
@@ -45,8 +45,13 @@
   <screenNumber>32D</screenNumber>
 </MovieTicket>
 <ParkingPass/>
+<SeasonPass>
+  <passName>SixWeeks-Unlimited</passName>
+  <startDate>2016-11-07</startDate>
+  <endDate>2016-11-19</endDate>
+</SeasonPass>
 <Refreshments>
-  <name>Caramel Popcorn</name>
+  <name>Salted Popcorn</name>
 </Refreshments>
 <SeasonPass>
   <passName>BlackFriday Deal</passName>
@@ -60,5 +65,5 @@
   <endDate>2016-11-11</endDate>
 </SeasonPass>
 <Refreshments>
-  <name>Double Cheeseburger</name>
+  <name>Double Hamburger</name>
 </Refreshments>

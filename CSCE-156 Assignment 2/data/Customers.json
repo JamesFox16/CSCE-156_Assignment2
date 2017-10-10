@@ -2,7 +2,7 @@
   "customerCode": "C001",
   "type": "G",
   "person": {
-    "personCode": "231",
+    "personCode": "342",
     "name": "Tom, Baker",
     "address": {
       "street": "1 Blue Jays Way",
@@ -12,13 +12,11 @@
       "country": " Canada"
     },
     "emails": [
-      "famousdoc@who.com",
-      "tbaker@cse.unl.edu",
       "mostfamous@whovian.com",
       "thedoctor@bbc.com"
     ]
   },
-  "name": "Clark Consultants",
+  "name": "CAS International Fellows",
   "address": {
     "street": "259 Concorde Suites",
     "city": "Lincoln",
@@ -31,7 +29,7 @@
   "customerCode": "C002",
   "type": "S",
   "person": {
-    "personCode": "944c",
+    "personCode": "055d",
     "name": " Starlin, Castro",
     "address": {
       "street": "1060 West Addison Street",
@@ -45,7 +43,7 @@
       "starlin_castro13@gmail.com"
     ]
   },
-  "name": "CAS International Fellows",
+  "name": "UNL Services",
   "address": {
     "street": "1223 Oldfather Hall",
     "city": "Lincoln",
@@ -58,8 +56,8 @@
   "customerCode": "C003",
   "type": "S",
   "person": {
-    "personCode": "306a",
-    "name": " Brock, Sampson",
+    "personCode": "417b",
+    "name": " C., Baker",
     "address": {
       "street": "123 N 1st Street",
       "city": "Omaha",
@@ -85,7 +83,7 @@
   "customerCode": "C004",
   "type": "G",
   "person": {
-    "personCode": "321f",
+    "personCode": "432g",
     "name": " Bud, Fox",
     "address": {
       "street": "321 Bronx Street",
@@ -96,10 +94,11 @@
     },
     "emails": [
       "bfox@gmail.com",
-      "csheen@crazy.net"
+      "johnston@boring.net",
+      "tbaker@cse.unl.edu"
     ]
   },
-  "name": "Stony Brook",
+  "name": "Gregory Smith",
   "address": {
     "street": "9800 Savage Rd",
     "city": "Fort Meade",
@@ -111,8 +110,20 @@
 {
   "customerCode": "C005",
   "type": "G",
+  "name": "Downtown Hallway",
+  "address": {
+    "street": " 16668 North Apple Street",
+    "city": "Denver",
+    "state": "CO",
+    "zip": "26447",
+    "country": "USA"
+  }
+}
+{
+  "customerCode": "C006",
+  "type": "G",
   "person": {
-    "personCode": "bbchar",
+    "personCode": "ccdibs",
     "name": " Kaylee, Ehrmantraut",
     "address": {
       "street": "800 West 7th Street",
@@ -120,7 +131,10 @@
       "state": " NM",
       "zip": " 87105",
       "country": "USA"
-    }
+    },
+    "emails": [
+      "sveum@cubs.com"
+    ]
   },
   "name": "Hewlett Industries",
   "address": {
@@ -132,11 +146,11 @@
   }
 }
 {
-  "customerCode": "C006",
+  "customerCode": "C007",
   "type": "S",
   "person": {
-    "personCode": "321dr",
-    "name": " C., Baker",
+    "personCode": "432es",
+    "name": " Brock, Sampson",
     "address": {
       "street": "Avery Hall",
       "city": "Lincoln",
@@ -148,7 +162,7 @@
       "dr@baker.com"
     ]
   },
-  "name": "Gregory Smith",
+  "name": "Stony Brook",
   "address": {
     "street": "456 West 7th St.",
     "city": "Omaha",

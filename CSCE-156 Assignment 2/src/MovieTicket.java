@@ -12,8 +12,11 @@ public class MovieTicket extends Product{
 		this.dateTime = dateTime;
 		this.movieName = movieName;
 		this.address = address;
-		this.screenNumber = screenNumber;
-		
+		this.screenNumber = screenNumber;	
+	}
+	
+	public double computeTax() {
+		return this.getProductPrice() * 0.06;
 	}
 		
 	//Getter/Setter for dateTime

@@ -3,7 +3,7 @@
   <customerCode>C001</customerCode>
   <type>G</type>
   <person>
-    <personCode>231</personCode>
+    <personCode>342</personCode>
     <name>Tom, Baker</name>
     <address>
       <street>1 Blue Jays Way</street>
@@ -13,13 +13,11 @@
       <country> Canada</country>
     </address>
     <emails>
-      <email>famousdoc@who.com</email>
-      <email>tbaker@cse.unl.edu</email>
       <email>mostfamous@whovian.com</email>
       <email>thedoctor@bbc.com</email>
     </emails>
   </person>
-  <name>Clark Consultants</name>
+  <name>CAS International Fellows</name>
   <address>
     <street>259 Concorde Suites</street>
     <city>Lincoln</city>
@@ -32,7 +30,7 @@
   <customerCode>C002</customerCode>
   <type>S</type>
   <person>
-    <personCode>944c</personCode>
+    <personCode>055d</personCode>
     <name> Starlin, Castro</name>
     <address>
       <street>1060 West Addison Street</street>
@@ -46,7 +44,7 @@
       <email>starlin_castro13@gmail.com</email>
     </emails>
   </person>
-  <name>CAS International Fellows</name>
+  <name>UNL Services</name>
   <address>
     <street>1223 Oldfather Hall</street>
     <city>Lincoln</city>
@@ -59,8 +57,8 @@
   <customerCode>C003</customerCode>
   <type>S</type>
   <person>
-    <personCode>306a</personCode>
-    <name> Brock, Sampson</name>
+    <personCode>417b</personCode>
+    <name> C., Baker</name>
     <address>
       <street>123 N 1st Street</street>
       <city>Omaha</city>
@@ -86,7 +84,7 @@
   <customerCode>C004</customerCode>
   <type>G</type>
   <person>
-    <personCode>321f</personCode>
+    <personCode>432g</personCode>
     <name> Bud, Fox</name>
     <address>
       <street>321 Bronx Street</street>
@@ -97,10 +95,11 @@
     </address>
     <emails>
       <email>bfox@gmail.com</email>
-      <email>csheen@crazy.net</email>
+      <email>johnston@boring.net</email>
+      <email>tbaker@cse.unl.edu</email>
     </emails>
   </person>
-  <name>Stony Brook</name>
+  <name>Gregory Smith</name>
   <address>
     <street>9800 Savage Rd</street>
     <city>Fort Meade</city>
@@ -112,8 +111,20 @@
 <Customer>
   <customerCode>C005</customerCode>
   <type>G</type>
+  <name>Downtown Hallway</name>
+  <address>
+    <street> 16668 North Apple Street</street>
+    <city>Denver</city>
+    <state>CO</state>
+    <zip>26447</zip>
+    <country>USA</country>
+  </address>
+</Customer>
+<Customer>
+  <customerCode>C006</customerCode>
+  <type>G</type>
   <person>
-    <personCode>bbchar</personCode>
+    <personCode>ccdibs</personCode>
     <name> Kaylee, Ehrmantraut</name>
     <address>
       <street>800 West 7th Street</street>
@@ -122,6 +133,9 @@
       <zip> 87105</zip>
       <country>USA</country>
     </address>
+    <emails>
+      <email>sveum@cubs.com</email>
+    </emails>
   </person>
   <name>Hewlett Industries</name>
   <address>
@@ -133,11 +147,11 @@
   </address>
 </Customer>
 <Customer>
-  <customerCode>C006</customerCode>
+  <customerCode>C007</customerCode>
   <type>S</type>
   <person>
-    <personCode>321dr</personCode>
-    <name> C., Baker</name>
+    <personCode>432es</personCode>
+    <name> Brock, Sampson</name>
     <address>
       <street>Avery Hall</street>
       <city>Lincoln</city>
@@ -149,7 +163,7 @@
       <email>dr@baker.com</email>
     </emails>
   </person>
-  <name>Gregory Smith</name>
+  <name>Stony Brook</name>
   <address>
     <street>456 West 7th St.</street>
     <city>Omaha</city>

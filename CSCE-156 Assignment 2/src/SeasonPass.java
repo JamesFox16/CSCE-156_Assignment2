@@ -11,6 +11,10 @@ public class SeasonPass extends Product{
 		this.endDate = endDate;
 	}
 	
+	public double computeTax() {
+		return this.getProductPrice() * 0.06;
+	}
+	
 	public String getPassName() {
 		return this.getPassName();
 	}
