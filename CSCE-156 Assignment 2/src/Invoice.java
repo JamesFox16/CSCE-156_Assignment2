@@ -10,11 +10,11 @@ public class Invoice {
 	private Person salesPerson;
 	private String date;
 	private List<Product> products;
-	
+	private List<String> quantityForProducts;
 	
 	//Constructor for the invoice objects
 	public Invoice(String invoiceCode, Customer customer, Person salesPerson,
-					String date, List<Product> products) {
+					String date, List<Product> products, List<String> quantityForProducts) {
 		this.invoiceCode = invoiceCode;
 		//this.customerCode = customerCode;
 		//this.salespersonCode = salespersonCode;
@@ -22,7 +22,19 @@ public class Invoice {
 		this.salesPerson = salesPerson;
 		this.date = date;
 		this.products = products;
+		this.quantityForProducts = quantityForProducts;
 	}
+	
+	public void calculateTotal() {
+		
+		Product tempProduct = products.get(0);
+		double price = tempProduct.getProductPrice();
+		int tempInt = Integer.parseInt(quantityForProducts.get(0));
+		double tempSubTotal = price * tempInt;
+		System.out.printf("%s8 %s20 %s10 %s8 %s8", "Code", "Item", "SubTotal", "Tax", "Total");
+	
+	}
+	
 	
 	//Simple Invoice
 	public void summary() {
@@ -45,13 +57,35 @@ public class Invoice {
 		i.detailed();
 	}
 	
+	private String getSalesPersonName() {
+		return salesPerson.getFirstName();
+	}
+	
 	//Help Format
 	@Override
 	public String toString() {
-		System.out.printf("Salesperson: %s\n", this.salesPerson.getFirstName());
+		
+		System.out.printf("Salesperson: %s\n", getSalesPersonName());
 		System.out.println("Customer info:");
-		System.out.printf("%-5s \n%-5s \n%-5s \n%-5s \n", this.customer.getName(), this.customer.getType(), this.customer.getPerson().getFirstName(), this.customer.getAddress());
+		System.out.printf("%-5s \n%-5s \n%-5s \n%-5s \n", this.customer.getName(), 
+				this.customer.getType(),
+				this.customer.getPerson().getFirstName(),
+				this.customer.getAddress());
+		System.out.println("-------------------------------------------------------------------------------------");
+		System.out.printf("%-8s %-40s %-10s %-10s %-10s\n", "Code:", "Item:", "SubTotal:", "Tax:", "Total:");
+		for(int i=0; i<products.size(); i++) {
+			Product tempProduct = products.get(i);
+			double price = tempProduct.getProductPrice();
+			int tempInt = Integer.parseInt(quantityForProducts.get(i));
+			double tempSubTotal = price * tempInt;
+			System.out.printf("%-8s %-40s %-10.2f %-10s %-10.2f\n", tempProduct.getProductCode(), 
+					tempProduct.getProductType(), tempSubTotal, "0", tempSubTotal);
+		}
+		System.out.println("-------------------------------------------------------------------------------------\n\n");
 		return null;
+		
 	}
+	
+	
 	
 }

@@ -54,4 +54,12 @@ public class Address {
 		public void setCountry(String country) {
 			this.country = country;
 		}
+		
+		public String toString() {
+			String toReturn;
+			toReturn = (getStreet()+ "\n"+ getCity()+", "+ getState()+ " "+ getZIP()+ " "+ getCountry());
+			
+			return toReturn;
+			
+		}
 }

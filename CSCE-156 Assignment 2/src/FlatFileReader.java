@@ -201,32 +201,22 @@ public class FlatFileReader {
 					
 					String[] hold = purchases[i].split(":");
 					String productCode = hold[0];
+					productsForInvoice.add(findProduct(productCode));
 					String quantity = hold[1];
+					quantityOfPurchases.add(quantity);
 					
 					if(hold.length == 3) {
 						String ticketCode = hold[2];
 					}
-		//Above method should work better
-					/*if (purchases.length == 2) {//Any other product
-						Product product = findProduct(purchases[i+0]);
-						productsForInvoice.add(product);
-						quantityOfPurchases.add(purchases[i+1]);
-						
-					}else if (purchases.length == 3) {//Parking pass
-						Product product = findProduct(purchases[i+0]);
-						productsForInvoice.add(product);
-						quantityOfPurchases.add(purchases[i+1]);
-						// Need to change most of this I just wanted to start working on it.
-						
-					}else {
-						// Error
-					}*/
 				}
+				Person p = findPerson(salespersonCode);
 				
 				//Implement quantity of products purchased somehow...
-				Invoice i = new Invoice(invoiceCode, findCustomer(customerCode), findPerson(salespersonCode), date, productsForInvoice);
-				invoiceList.add(i);
+				Invoice j = new Invoice(invoiceCode, findCustomer(customerCode), p, date, productsForInvoice, quantityOfPurchases);
+				invoiceList.add(j);
+				
 			}
+			
 			br.close();
 			return invoiceList;
 			
