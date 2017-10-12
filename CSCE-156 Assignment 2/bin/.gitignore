@@ -1,9 +1,7 @@
-/Address.class
-/Customer.class
-/DataConverter.class
 /FlatFileReader.class
 /General.class
 /Invoice.class
+/InvoiceReport.class
 /JsonWriter.class
 /MovieTicket.class
 /ParkingPass.class
@@ -14,4 +12,3 @@
 /Student.class
 /XMLInterface.class
 /XMLWriter.class
-/InvoiceReport.class
