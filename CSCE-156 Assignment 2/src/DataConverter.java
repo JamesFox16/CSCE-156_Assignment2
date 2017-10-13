@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class DataConverter {
-	/*
+	
 	public static void main(String[] args) throws IOException {
-		
+		/*
 		// Creating FlatFileReader object
 		FlatFileReader ffr = new FlatFileReader();
 		
@@ -25,7 +25,7 @@ public class DataConverter {
 		json.jsonConverterCustomer(c);
 		json.jsonConverterPerson(per);
 		json.jsonConverterProduct(pro);
-		
+	*/	
 	}
-*/
+
 }

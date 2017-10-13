@@ -5,11 +5,14 @@ public class InvoiceReport {
 
 	public static void main(String[] args) throws IOException {
 		
+		//Create needed lists
 		FlatFileReader ffr = new FlatFileReader();
 		List<Person> per = ffr.createPersonList();
 		List<Customer> cust = ffr.createCustomerList();
 		List<Product> pro = ffr.createProductList();
 		List<Invoice> invoice = ffr.createInvoiceList();
+		
+		//Display Detailed Reports
 		if(invoice != null) {
 			invoice.toString();
 		}else {
@@ -26,11 +29,13 @@ public class InvoiceReport {
 		for(int i=0; i<invoice.size(); i++) {
 			invoice.get(i).summary(0);
 		}
-		double totalTotal = 0;
+		double totalTotal=0;
 		double totalTax=0;
 		double totalSubTotal=0;
 		double totalFees=0;
-		double totalDiscount =0;
+		double totalDiscount=0;
+		
+		//Calculate totals
 		for(int i=0; i<invoice.size(); i++) {
 			totalTotal += invoice.get(i).getTotal();
 			totalTax += invoice.get(i).getTaxTotal();
@@ -39,10 +44,10 @@ public class InvoiceReport {
 			totalDiscount += invoice.get(i).getDiscountTotal();
 			
 		}
-		Invoice invoices = new Invoice();
-		//Summary totals
+		
+		//Display Summary reports
 		System.out.println("=====================================================================================================================");
-		System.out.printf("%-60s $%-10.2f $%-10.2f $%-10.2f $%-10.2f $%-10.2f\n", "TOTAL:", totalSubTotal, totalFees,
+		System.out.printf("%-60s $%-10.2f $%-10.2f $%-10.2f -$%-10.2f $%-10.2f\n", "TOTAL:", totalSubTotal, totalFees,
 				totalTax, totalDiscount, totalTotal);
 	}
 

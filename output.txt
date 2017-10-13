@@ -1,0 +1,119 @@
+Salesperson:  Chris, Eccleston
+Customer info:
+UNL Services 
+Student 
+ Starlin, Castro 
+1223 Oldfather Hall
+Lincoln, NE 68503 USA 
+-------------------------------------------------------------------------------------
+Code:    Item:                                              SubTotal:  Tax:       Total:    
+gq23     IT (2 units @ $21.5/Unit 7% Discount for T/Th)     $43.00      $0.00       $43.00     
+4390     Parking Pass (1 units @ $0.00/Unit with Tickets)   $0.00       $0.00       $0.00      
+gg34     Coors Beer-20oz (4 units @ $4.74/Unit - 5% discount)  $18.96      $0.00       $18.96     
+-------------------------------------------------------------------------------------
+Sub-Totals:                                                  $61.96      $0.00       $61.96     
+Student Discount: $-4.96      
+One Time Student Fee: $6.75      
+TOTAL:     $63.76     
+
+
+        Thank you for your purchase!
+
+
+
+Salesperson:  David, Tennant
+Customer info:
+Gregory Smith 
+General 
+ Bud, Fox 
+9800 Savage Rd
+Fort Meade, MD 20755 USA 
+-------------------------------------------------------------------------------------
+Code:    Item:                                              SubTotal:  Tax:       Total:    
+c30f     Winter Special (23 units @ $120.0/Unit)            $2760.00    $110.40     $2870.40   
+2340     The Wild Life (31 units @ $10.23/Unit 7% Discount for T/Th)  $317.13     $19.03      $336.16    
+01gb     Parking Pass (30 units @ $0.00/Unit with Tickets)  $0.00       $0.00       $0.00      
+43g5     Salted Popcorn (17 units @ $5.22/Unit - 5% discount)  $88.82      $5.33       $94.15     
+-------------------------------------------------------------------------------------
+Sub-Totals:                                                  $3165.96    $134.76     $3300.71   
+TOTAL:     $3300.71   
+
+
+        Thank you for your purchase!
+
+
+
+Salesperson:  Matt, Smith
+Customer info:
+Downtown Hallway 
+General 
+ Jon, Pertwee 
+ 16668 North Apple Street
+Denver, CO 26447 USA 
+-------------------------------------------------------------------------------------
+Code:    Item:                                              SubTotal:  Tax:       Total:    
+893h     Inside Out (7 units @ $25/Unit 7% Discount for T/Th)  $175.00     $10.50      $185.50    
+4z03     BlackFriday Deal (6 units @ $58.0/Unit)            $348.00     $20.88      $368.88    
+4390     Parking Pass (2 units @ $0.00/Unit with Tickets)   $0.00       $0.00       $0.00      
+zq34     Double Hamburger (4 units @ $8.55/Unit - 5% discount)  $34.20      $2.05       $36.25     
+-------------------------------------------------------------------------------------
+Sub-Totals:                                                  $557.20     $33.43      $590.63    
+TOTAL:     $590.63    
+
+
+        Thank you for your purchase!
+
+
+
+Salesperson:  Richard, Hurndall
+Customer info:
+Stony Brook 
+Student 
+ Brock, Sampson 
+456 West 7th St.
+Omaha, NE 68500 USA 
+-------------------------------------------------------------------------------------
+Code:    Item:                                              SubTotal:  Tax:       Total:    
+01gc     Parking Pass (3 units @ $20.0/Unit)                $60.00      $0.00       $60.00     
+43g5     Salted Popcorn (3 units @ $5.5/Unit)               $16.50      $0.00       $16.50     
+-------------------------------------------------------------------------------------
+Sub-Totals:                                                  $76.50      $0.00       $76.50     
+Student Discount: $-6.12      
+One Time Student Fee: $6.75      
+TOTAL:     $77.13     
+
+
+        Thank you for your purchase!
+
+
+
+Salesperson:  John, Smith
+Customer info:
+CAS International Fellows 
+General 
+Tom, Baker 
+259 Concorde Suites
+Lincoln, NE 68588-0115 USA 
+-------------------------------------------------------------------------------------
+Code:    Item:                                              SubTotal:  Tax:       Total:    
+fpbp     SixWeeks-Unlimited (2 units @ $221.0/Unit)         $442.00     $17.68      $459.68    
+-------------------------------------------------------------------------------------
+Sub-Totals:                                                  $442.00     $17.68      $459.68    
+TOTAL:     $459.68    
+
+
+        Thank you for your purchase!
+
+
+
+===================================
+Executive Summary Report
+=========================
+Invoice    Customer                       Salesperson          Subtotal   Fees       Tax        Discount   Total     
+INV001     UNL Services                    Chris, Eccleston    $61.96      $6.75       $0.00       -$4.96       $63.76     
+INV002     Gregory Smith                   David, Tennant      $3165.96    $0.00       $134.76     -$0.00       $3300.71   
+INV003     Downtown Hallway                Matt, Smith         $557.20     $0.00       $33.43      -$0.00       $590.63    
+INV004     Stony Brook                     Richard, Hurndall   $76.50      $6.75       $0.00       -$6.12       $77.13     
+INV005     CAS International Fellows       John, Smith         $442.00     $0.00       $17.68      -$0.00       $459.68    
+=====================================================================================================================
+TOTAL:                                                       $4303.62    $13.50      $185.87     -$11.08      $4491.91   

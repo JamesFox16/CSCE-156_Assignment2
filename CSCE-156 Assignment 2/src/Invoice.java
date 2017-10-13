@@ -6,8 +6,6 @@ public class Invoice {
 
 	//Private variables for the invoice
 	private String invoiceCode;
-	//private String customerCode;
-	//private String salespersonCode;
 	private Customer customer;
 	private Person salesPerson;
 	private String date;
@@ -21,16 +19,10 @@ public class Invoice {
 	private double theActualFinalFees=0;
 	private double theAcutalFinalDiscount=0;
 	
-	public Invoice() {
-		
-	}
-	
 	//Constructor for the invoice objects
 	public Invoice(String invoiceCode, Customer customer, Person salesPerson,
 					String date, List<Product> products, List<String> quantityForProducts, List<String> ticketCode) {
 		this.invoiceCode = invoiceCode;
-		//this.customerCode = customerCode;
-		//this.salespersonCode = salespersonCode;
 		this.customer = customer;
 		this.salesPerson = salesPerson;
 		this.date = date;
@@ -53,8 +45,8 @@ public class Invoice {
 	//Simple Invoice
 	public void summary(int number) {
 		InvoiceSummary temp = inSum.get(number);
-		//Start of an invoice line. ToDo: calculates subtotal, tax, discount, total. Placeholders for <-- are below
-		System.out.printf("%-10s %-30s %-20s $%-10.2f $%-10.2f $%-10.2f $%-10.2f $%-10.2f\n",temp.getInvoice(), temp.getCustomer(),
+		//Start of an invoice line
+		System.out.printf("%-10s %-30s %-20s $%-10.2f $%-10.2f $%-10.2f -$%-10.2f $%-10.2f\n",temp.getInvoice(), temp.getCustomer(),
 				temp.getSalesPerson(), temp.getSubtotal(), temp.getFees(), temp.getTaxes(), temp.getDiscount(), 
 				temp.getTotal());
 		theActualFinalTotal += temp.getTotal();
@@ -63,16 +55,7 @@ public class Invoice {
 		theActualFinalFees += this.customer.addFees();
 		theAcutalFinalDiscount += temp.getDiscount();
 		
-		
 	}
-	
-	//Detailed Invoice
-	public void detailed() {
-		
-		this.customer.toString();
-		
-	}
-	
 	
 	private String getSalesPersonName() {
 		return salesPerson.getFirstName();
@@ -100,10 +83,18 @@ public class Invoice {
 	@Override
 	public String toString() {
 		
+		String type;
+		//Slightly better looking Customer Type on Report
+		if(this.customer.getType().equals("S")) {
+			type = "Student";
+		}else {
+			type = "General";
+		}
+		
 		System.out.printf("Salesperson: %s\n", getSalesPersonName());
 		System.out.println("Customer info:");
 		System.out.printf("%-5s \n%-5s \n%-5s \n%-5s \n", this.customer.getName(), 
-				this.customer.getType(),
+				type,
 				this.customer.getPerson().getFirstName(),
 				this.customer.getAddress());
 		System.out.println("-------------------------------------------------------------------------------------");
@@ -116,6 +107,7 @@ public class Invoice {
 		double taxRate;
 		double discount = 0;
 		boolean ticketHasBeenPurchased = false;
+		boolean ticketParkingConnection=false;
 		if(this.customer.getType().equals("S")) {
 			taxRate = 0;
 		}else {
@@ -124,6 +116,12 @@ public class Invoice {
 		DateDiscount dateDiscountChecker = new DateDiscount();
 		for(int i=0; i<products.size(); i++) {
 			
+			//Check for free Parking Pass
+			if(ticketCode.get(i) != null) {
+				ticketParkingConnection = true;
+			}else {
+				ticketParkingConnection = false;
+			}
 			
 			Product tempProduct = products.get(i);
 			double price = tempProduct.getProductPrice();
@@ -131,14 +129,15 @@ public class Invoice {
 			// Checking to see if the tax rate applys in specific cases.
 			if((tempProduct.getProductType().equals("M") || tempProduct.getProductType().equals("P")) 
 					&& this.customer.getType().equals("G")) {
-				taxRate = .06;
+				taxRate = .06; //Ticket tax rate
 			}
-			if(tempProduct.getProductType().equals("M")) {
+			
+			if(tempProduct.getProductType().equals("M")) { //Movie tickets
 				ticketHasBeenPurchased = true;
 				MovieTicket tempMovie = (MovieTicket)tempProduct;
 				boolean discountTF = dateDiscountChecker.isTuOrThurs(tempMovie.getDateTime());
 				if(discountTF) {
-					price = price * .93;//7% discount
+					price = price * .93;//7% discount for date of purchase
 				}
 				
 				double tempSubTotal = price * tempInt;
@@ -153,7 +152,7 @@ public class Invoice {
 				
 			}else if(tempProduct.getProductType().equals("R") && ticketHasBeenPurchased) {
 				
-				price = price * .95;//7% discount
+				price = price * .95;//5% discount for pre-ordering
 				
 				
 				double tempSubTotal = price * tempInt;
@@ -165,9 +164,20 @@ public class Invoice {
 				System.out.printf("%-8s %-50s $%-10.2f $%-10.2f $%-10.2f\n", tempProduct.getProductCode(), 
 						tempProduct.getName()+ " ("+tempInt+" units @ $"+ df.format(price)+ "/Unit - 5% discount) ", tempSubTotal, 
 						tempTax, tempTotal);
-			}
-			
-			else {
+				
+			}else if(ticketParkingConnection) {//Free parking passes for ticket purchases
+				
+				double tempSubTotal =0;
+				double tempTax = tempSubTotal * taxRate;
+				double tempTotal = 0;
+				totalTotal += tempTotal;
+				totalSubTotal += tempSubTotal;
+				totalTax += tempTax;
+				System.out.printf("%-8s %-50s $%-10.2f $%-10.2f $%-10.2f\n", tempProduct.getProductCode(), 
+					tempProduct.getName()+ " ("+tempInt+" units @ $0.00"+ "/Unit with Tickets) ", tempSubTotal, 
+					tempTax, tempTotal);
+				
+			}else {
 				double tempSubTotal = price * tempInt;
 				double tempTax = tempSubTotal * taxRate;
 				double tempTotal = tempSubTotal + tempTax;
@@ -185,7 +195,7 @@ public class Invoice {
 		System.out.println("-------------------------------------------------------------------------------------");
 		System.out.printf("%-60s $%-10.2f $%-10.2f $%-10.2f\n", "Sub-Totals:", totalSubTotal, totalTax, totalTotal);
 		
-		// Output for the student discount and onetime fee.
+		// Output for the student discount and one time fee.
 		if (this.customer.getType().equals("S")) {
 			discount = totalTotal *.08;
 			totalTotal = totalTotal - discount;
@@ -196,11 +206,13 @@ public class Invoice {
 		
 		System.out.printf("%-10s $%-10.2f\n\n\n", "TOTAL:", totalTotal);
 		System.out.println("        Thank you for your purchase!\n\n\n");
+		
+		//List to be used for Summary Report
 		InvoiceSummary tempSum = new InvoiceSummary(this.invoiceCode, this.customer.getName(), this.salesPerson.getFirstName(), 
 				totalSubTotal, this.customer.addFees(), totalTax, discount, totalTotal);
 		inSum.add(tempSum);
 		
-		return "";
+		return null;
 		
 	}
 	
