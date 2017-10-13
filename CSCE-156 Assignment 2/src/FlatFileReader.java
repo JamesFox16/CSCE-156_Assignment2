@@ -196,6 +196,7 @@ public class FlatFileReader {
 				
 				List<Product> productsForInvoice = new ArrayList<Product>();
 				List<String> quantityOfPurchases = new ArrayList<String>();
+				List<String> ticketCodes = new ArrayList<String>();
 				String[] purchases = info[4].split(",");
 				for(int i=0; i<purchases.length; i++) {
 					
@@ -206,13 +207,16 @@ public class FlatFileReader {
 					quantityOfPurchases.add(quantity);
 					
 					if(hold.length == 3) {
-						String ticketCode = hold[2];
+						ticketCodes.add(hold[2]);
+					}else {
+						ticketCodes.add(null);
 					}
 				}
 				Person p = findPerson(salespersonCode);
 				
 				//Implement quantity of products purchased somehow...
-				Invoice j = new Invoice(invoiceCode, findCustomer(customerCode), p, date, productsForInvoice, quantityOfPurchases);
+				Invoice j = new Invoice(invoiceCode, findCustomer(customerCode), p, date,
+						productsForInvoice, quantityOfPurchases, ticketCodes);
 				invoiceList.add(j);
 				
 			}

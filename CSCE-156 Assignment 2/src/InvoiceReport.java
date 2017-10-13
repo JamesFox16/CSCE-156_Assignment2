@@ -24,7 +24,7 @@ public class InvoiceReport {
 		//Test/Examples below
 		Person p = new Person("abc", "John", null);
 		Customer c = new Student("zyx", "S", p, "Jose", null);
-		Invoice i = new Invoice("01", c, p, "00-00-0000", null,null);
+		Invoice i = new Invoice("01", c, p, "00-00-0000", null,null,null);
 		
 		i.summary();
 		
