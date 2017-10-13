@@ -11,9 +11,10 @@ public class Product {
 	private String productCode;
 	private String productType;
 	private double price;
+	private String name;
 	//private int quantity;
 	
-	public Product(String productCode, String productType, double unitPrice) {
+	public Product(String productCode, String productType, double unitPrice, String name) {
 		this.productCode = productCode;
 		this.productType = productType;
 		this.price = unitPrice;
@@ -43,47 +44,8 @@ public class Product {
 		this.productType = productType;
 	}
 	
-	/* Setup to make XML/Json writers interfaces
-	public void xmlConverter(List<Product> products) {
-		File xmlOutput = new File("data/Products.xml");// The location of the data file.
-		PrintWriter xmlPrintWriter = null;
-		
-		try {
-			xmlPrintWriter = new PrintWriter(xmlOutput);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		// Sets up the header for the xml file
-		xmlPrintWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
-		
-		// Loop to go throught the list of products
-		for(Object aProduct : products) {
-			String productOut = xstream.toXML(aProduct);
-			xmlPrintWriter.write(productOut+"\n");// new line for better formatting
-		}
-		xmlPrintWriter.close();
+	public String getName() {
+		return this.name;
 	}
-	public void jsonConverterProduct(List<Product> products) {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		File jsonOutput = new File("data/Products.json");
-		
-		PrintWriter jsonPrintWriter = null;
-		
-		try {
-			jsonPrintWriter = new PrintWriter(jsonOutput);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		// Loop to go through all products in the list.
-		for(Product aProduct : products) {
-			String productOutput = gson.toJson(aProduct);
-			jsonPrintWriter.write(productOutput+"\n");
-			
-		}
-		jsonPrintWriter.close();
-		
-	}
-	*/
+	
 }

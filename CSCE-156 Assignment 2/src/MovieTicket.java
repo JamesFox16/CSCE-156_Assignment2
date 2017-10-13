@@ -8,7 +8,7 @@ public class MovieTicket extends Product{
 		
 	public MovieTicket(String productCode, String productType, String dateTime, String movieName,
 			Address address, String screenNumber, double unitPrice) {
-		super(productCode, productType, unitPrice);
+		super(productCode, productType, unitPrice, movieName);
 		this.dateTime = dateTime;
 		this.movieName = movieName;
 		this.address = address;
@@ -28,7 +28,7 @@ public class MovieTicket extends Product{
 	}
 	
 	//Getter/Setter for movieName
-	public String getMovieName() {
+	public String getName() {
 		return this.movieName;
 	}
 	public void setMovieName(String movieName) {

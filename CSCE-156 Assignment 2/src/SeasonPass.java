@@ -5,7 +5,7 @@ public class SeasonPass extends Product{
 	private String endDate;
 	
 	public SeasonPass(String productCode, String productType, String passName, String startDate, String endDate, double unitPrice) {
-		super(productCode, productType, unitPrice);
+		super(productCode, productType, unitPrice, passName);
 		this.passName = passName;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -15,8 +15,8 @@ public class SeasonPass extends Product{
 		return this.getProductPrice() * 0.06;
 	}
 	
-	public String getPassName() {
-		return this.getPassName();
+	public String getName() {
+		return this.passName;
 	}
 	
 	//Getter/Setter for startDate

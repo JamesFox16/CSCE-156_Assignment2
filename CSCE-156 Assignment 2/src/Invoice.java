@@ -72,16 +72,38 @@ public class Invoice {
 				this.customer.getPerson().getFirstName(),
 				this.customer.getAddress());
 		System.out.println("-------------------------------------------------------------------------------------");
-		System.out.printf("%-8s %-40s %-10s %-10s %-10s\n", "Code:", "Item:", "SubTotal:", "Tax:", "Total:");
+		System.out.printf("%-8s %-50s %-10s %-10s %-10s\n", "Code:", "Item:", "SubTotal:", "Tax:", "Total:");
+		
+		double totalTotal=0;
+		double totalSubTotal=0;
+		double totalTax = 0;
+		double taxRate;
+		if(this.customer.getType().equals("S")) {
+			taxRate = 0;
+		}else {
+			taxRate = .10;
+		}
+		
 		for(int i=0; i<products.size(); i++) {
+			
+			
 			Product tempProduct = products.get(i);
 			double price = tempProduct.getProductPrice();
 			int tempInt = Integer.parseInt(quantityForProducts.get(i));
 			double tempSubTotal = price * tempInt;
-			System.out.printf("%-8s %-40s %-10.2f %-10s %-10.2f\n", tempProduct.getProductCode(), 
-					tempProduct.getProductType(), tempSubTotal, "0", tempSubTotal);
+			double tempTax = tempSubTotal * taxRate;
+			double tempTotal = tempSubTotal + tempTax;
+			totalTotal += tempTotal;
+			totalSubTotal += tempSubTotal;
+			totalTax += tempTax;
+			System.out.printf("%-8s %-50s $%-10.2f $%-10.2f $%-10.2f\n", tempProduct.getProductCode(), 
+					tempProduct.getName()+ " ("+tempInt+" units @ $"+ price+ "/Unit) ", tempSubTotal, tempTax, tempTotal);
+			
+			//(1 units @ $55.00 with 1 free)
 		}
-		System.out.println("-------------------------------------------------------------------------------------\n\n");
+		System.out.println("-------------------------------------------------------------------------------------");
+		System.out.printf("%-60s $%-10.2f $%-10.2f $%-10.2f\n", "Sub-Totals:", totalSubTotal, totalTax, totalTotal);
+		System.out.printf("%-10s $%-10.2f\n\n\n", "TOTAL:", totalTotal);
 		return null;
 		
 	}

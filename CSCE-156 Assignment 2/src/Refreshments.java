@@ -3,7 +3,7 @@ public class Refreshments extends Product{
 	private String name;
 	
 	public Refreshments(String productCode, String productType, String name, double unitPrice) {
-		super(productCode, productType, unitPrice);
+		super(productCode, productType, unitPrice, name);
 		this.name = name;
 	}
 	
