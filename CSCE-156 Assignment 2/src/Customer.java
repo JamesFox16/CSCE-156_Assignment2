@@ -33,12 +33,20 @@ public class Customer{
 	
 	//At invoice report, multiply subtotal by this method then add together
 	public double computeDiscount() {
-		return 0;
+		if(this.getType().equals("S")) {
+			return 6.75;
+		}else {
+			return 1;
+		}
 	}
 	
 	//At invoice report, add this function to total
 	public double addFees() {
-		return 0;
+		if(this.getType().equals("S")) {
+			return 6.75;
+		}else {
+			return 0;
+		}
 	}
 	
 	//Getter/Setter for customerCode

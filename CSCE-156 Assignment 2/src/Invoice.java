@@ -1,4 +1,5 @@
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Invoice {
@@ -13,6 +14,16 @@ public class Invoice {
 	private List<Product> products;
 	private List<String> quantityForProducts;
 	private List<String> ticketCode;
+	private List<InvoiceSummary> inSum = new ArrayList<InvoiceSummary>();
+	private double theActualFinalTotal=0;
+	private double theActualFinalTaxTotal=0;
+	private double theActualFinalSubTotalTotal=0;
+	private double theActualFinalFees=0;
+	private double theAcutalFinalDiscount=0;
+	
+	public Invoice() {
+		
+	}
 	
 	//Constructor for the invoice objects
 	public Invoice(String invoiceCode, Customer customer, Person salesPerson,
@@ -40,10 +51,18 @@ public class Invoice {
 	
 	
 	//Simple Invoice
-	public void summary() {
-		
+	public void summary(int number) {
+		InvoiceSummary temp = inSum.get(number);
 		//Start of an invoice line. ToDo: calculates subtotal, tax, discount, total. Placeholders for <-- are below
-		System.out.printf("%-10s %-20s %-20s %-10s %-10s %-10s %-10s %-10s\n",this.invoiceCode, this.customer.getName(), this.salesPerson.getFirstName(), "subtotal", this.customer.addFees(), "tax", "discount", "total");
+		System.out.printf("%-10s %-30s %-20s $%-10.2f $%-10.2f $%-10.2f $%-10.2f $%-10.2f\n",temp.getInvoice(), temp.getCustomer(),
+				temp.getSalesPerson(), temp.getSubtotal(), temp.getFees(), temp.getTaxes(), temp.getDiscount(), 
+				temp.getTotal());
+		theActualFinalTotal += temp.getTotal();
+		theActualFinalTaxTotal +=temp.getTaxes() ;
+		theActualFinalSubTotalTotal += temp.getSubtotal();
+		theActualFinalFees += this.customer.addFees();
+		theAcutalFinalDiscount += temp.getDiscount();
+		
 		
 	}
 	
@@ -54,15 +73,28 @@ public class Invoice {
 		
 	}
 	
-	//Both simple and detailed together
-	public void generateInvoice(Invoice i) {
-		i.summary();
-		i.detailed();
-	}
 	
 	private String getSalesPersonName() {
 		return salesPerson.getFirstName();
 	}
+	
+	public double getTotal() {
+		return this.theActualFinalTotal;
+	}
+	public double getTaxTotal() {
+		return this.theActualFinalTaxTotal;
+	}
+	public double getSubTotalTotal() {
+		return this.theActualFinalSubTotalTotal;
+	}
+	public double getDiscountTotal() {
+		return this.theAcutalFinalDiscount;
+	}
+	public double getFeesTotal() {
+		return this.theActualFinalFees;
+	}
+	
+	
 	
 	//Help Format
 	@Override
@@ -82,6 +114,7 @@ public class Invoice {
 		double totalSubTotal=0;
 		double totalTax = 0;
 		double taxRate;
+		double discount = 0;
 		boolean ticketHasBeenPurchased = false;
 		if(this.customer.getType().equals("S")) {
 			taxRate = 0;
@@ -146,13 +179,15 @@ public class Invoice {
 					tempTax, tempTotal);
 			}
 			
+			
+			
 		}
 		System.out.println("-------------------------------------------------------------------------------------");
 		System.out.printf("%-60s $%-10.2f $%-10.2f $%-10.2f\n", "Sub-Totals:", totalSubTotal, totalTax, totalTotal);
 		
 		// Output for the student discount and onetime fee.
 		if (this.customer.getType().equals("S")) {
-			double discount = totalTotal *.08;
+			discount = totalTotal *.08;
 			totalTotal = totalTotal - discount;
 			System.out.printf("%-10s $-%-10.2f\n", "Student Discount:", discount);
 			totalTotal += 6.75;
@@ -160,7 +195,12 @@ public class Invoice {
 		}
 		
 		System.out.printf("%-10s $%-10.2f\n\n\n", "TOTAL:", totalTotal);
-		return null;
+		System.out.println("        Thank you for your purchase!\n\n\n");
+		InvoiceSummary tempSum = new InvoiceSummary(this.invoiceCode, this.customer.getName(), this.salesPerson.getFirstName(), 
+				totalSubTotal, this.customer.addFees(), totalTax, discount, totalTotal);
+		inSum.add(tempSum);
+		
+		return "";
 		
 	}
 	

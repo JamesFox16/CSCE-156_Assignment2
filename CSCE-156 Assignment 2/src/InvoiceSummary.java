@@ -24,11 +24,55 @@ public class InvoiceSummary {
 		this.discount = discount;
 		this.total = total;
 	}
-public void summary() {
-		
-		//Start of an invoice line. ToDo: calculates subtotal, tax, discount, total. Placeholders for <-- are below
-		System.out.printf("%-10s %-20s %-20s %-10s %-10s %-10s %-10s %-10s\n",invoice, customer, salesPerson, subtotal, fees, tax, discount, total);
-		
+
+
+
+	public String getInvoice() {
+		return invoice;
 	}
+
+
+
+	public String getCustomer() {
+		return customer;
+	}
+
+
+
+	public String getSalesPerson() {
+		return salesPerson;
+	}
+
+
+
+	public double getSubtotal() {
+		return subtotal;
+	}
+
+
+
+	public double getFees() {
+		return fees;
+	}
+
+
+
+	public double getTaxes() {
+		return taxes;
+	}
+
+
+
+	public double getDiscount() {
+		return discount;
+	}
+
+
+
+	public double getTotal() {
+		return total;
+	}
+	
+	
 	
 }
