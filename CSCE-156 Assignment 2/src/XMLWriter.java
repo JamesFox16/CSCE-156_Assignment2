@@ -1,9 +1,9 @@
 
-import java.io.File;
+/*import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List;*/
 
 import com.thoughtworks.xstream.XStream;
 
@@ -12,7 +12,7 @@ public class XMLWriter{
 	private XStream xstream = null;
 	
 	
-	public XMLWriter() {
+	/*public XMLWriter() {
 		this.xstream = new XStream();
 		
 		//Aliases for xstream
@@ -87,5 +87,5 @@ public class XMLWriter{
 		}
 		xmlPrintWriter.close();
 	}
-	
+*/	
 }

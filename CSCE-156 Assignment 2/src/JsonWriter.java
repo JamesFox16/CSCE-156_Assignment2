@@ -1,14 +1,15 @@
 
-import java.io.File;
+/*import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.GsonBuilder;*/
 
 public class JsonWriter {
 	
+	/*
 	// Method to convert Person list into json file
 	public void jsonConverterPerson(List<Person> persons) {
 		
@@ -83,4 +84,5 @@ public class JsonWriter {
 		jsonPrintWriter.close();
 		
 	}
+	*/
 }
