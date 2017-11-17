@@ -34,7 +34,7 @@ public class InvoiceData {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.executeUpdate(query);
 			ps.close();
-			conn.close();
+			
 		}catch (SQLException e){
 			System.out.println("SQLException: ");
 			e.printStackTrace();
@@ -212,7 +212,7 @@ public class InvoiceData {
 		}
 		
 		query = "TRUNCATE TABLE Customer";
-		conn = DatabaseInfo.getConnection();
+		
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.executeUpdate();
@@ -222,7 +222,7 @@ public class InvoiceData {
 			throw new RuntimeException(e);
 		}
 		
-		conn = DatabaseInfo.getConnection();
+		
 		query = "SET FOREIGN_KEY_CHECKS=1";
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
@@ -456,9 +456,9 @@ public class InvoiceData {
 	 * 10. Removes all invoice records from the database
 	 */
 	public static void removeAllInvoices() {
-		//removeAllProducts();
-	//	removeAllPersons();
-		//removeAllCustomers();
+		removeAllProducts();
+		removeAllPersons();
+		removeAllCustomers();
 		Connection conn = DatabaseInfo.getConnection();
 		String query = "SET FOREIGN_KEY_CHECKS=0";
 		try {
