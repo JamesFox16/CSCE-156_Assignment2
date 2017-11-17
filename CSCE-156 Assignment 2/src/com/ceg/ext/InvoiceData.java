@@ -198,11 +198,37 @@ public class InvoiceData {
 	 * 4. Method that removes every customer record from the database
 	 */
 	public static void removeAllCustomers() {
-		String query = "TRUNCATE TABLE Customer";
 		Connection conn = DatabaseInfo.getConnection();
+		String query = "SET FOREIGN_KEY_CHECKS=0";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.executeUpdate(query);
+			ps.close();
+			
+		}catch (SQLException e){
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		query = "TRUNCATE TABLE Customer";
+		conn = DatabaseInfo.getConnection();
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.executeUpdate();
+		}catch (SQLException e){
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		conn = DatabaseInfo.getConnection();
+		query = "SET FOREIGN_KEY_CHECKS=1";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.executeUpdate(query);
+			ps.close();
+			conn.close();
 		}catch (SQLException e){
 			System.out.println("SQLException: ");
 			e.printStackTrace();
@@ -287,11 +313,37 @@ public class InvoiceData {
 	 * 5. Removes all product records from the database
 	 */
 	public static void removeAllProducts() {
-		String query = "TRUNCATE TABLE Product";
 		Connection conn = DatabaseInfo.getConnection();
+		String query = "SET FOREIGN_KEY_CHECKS=0";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.executeUpdate(query);
+			ps.close();
+			
+		}catch (SQLException e){
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		query = "TRUNCATE TABLE Product";
+		conn = DatabaseInfo.getConnection();
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.executeUpdate();
+		}catch (SQLException e){
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		conn = DatabaseInfo.getConnection();
+		query = "SET FOREIGN_KEY_CHECKS=1";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.executeUpdate(query);
+			ps.close();
+			conn.close();
 		}catch (SQLException e){
 			System.out.println("SQLException: ");
 			e.printStackTrace();
