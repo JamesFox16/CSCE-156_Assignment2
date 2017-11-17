@@ -14,7 +14,7 @@ List<Invoice> invoice = InvoiceData.getInvoiceList();
 		
 		for(int i=0; i<invoice.size(); i++) {
 //			System.out.println(invoice.get(i).getCode());
-			invoice.get(i).wordlessString();
+			//invoice.get(i);//.wordlessString();
 		}//Create LinkedList
 		InvoiceList il = new InvoiceList();
 		

@@ -766,7 +766,7 @@ public class InvoiceData {
     public static ArrayList<Invoice> getInvoiceList(){
     		ArrayList<Invoice> inl = new ArrayList<Invoice>();
     		ArrayList<Invoice> finalListToReturn = new ArrayList<Invoice>();
-    		String query = "SELECT InvoiceCode, CustomerID, PersonID, InvoiceDate, ProductID, Quantity FROM Invoice GROUP BY InvoiceCode";
+    		String query = "SELECT * FROM Invoice ORDER BY InvoiceCode ";
     		Connection conn = DatabaseInfo.getConnection(); 
     		String invoiceCode ="";
     		String customerCode = "";
@@ -777,38 +777,51 @@ public class InvoiceData {
     		try {
     			PreparedStatement ps = conn.prepareStatement(query);
     			ResultSet rs = ps.executeQuery();
+    			//int count=1;
     			while(rs.next()) {
+    				//System.out.println("Is this working? "+count);
     				invoiceCode = rs.getString("InvoiceCode");
     				customerCode = rs.getString("CustomerID");
     				personCode = rs.getString("PersonID");
     				invoiceDate = rs.getString("InvoiceDate");
     				productID = rs.getString("ProductID");
     				quantity = rs.getInt("Quantity");
+    				//System.out.println(invoiceCode+" "+ customerCode+ " "+ personCode+" "+quantity);
     				Invoice in = new Invoice(invoiceCode, customerCode, personCode, invoiceDate, productID, quantity);
     				inl.add(in);
+    				//count++;
     			}
     			rs.close();
+    			conn.close();
     			
     		}catch(SQLException e) {
     			System.out.println("SQLException: ");
     			e.printStackTrace();
     			throw new RuntimeException(e);
     		}
-    		for(int i=0; i<inl.size(); i++) {
+    		for(int i=0; i<inl.size()-1; i++) {
     			ArrayList<Product> prodList = new ArrayList<Product>();
     			ArrayList<String> quantList = new ArrayList<String>();
     			String tempInvoiceCode = inl.get(i).getCode();
     			String tempCust = inl.get(i).getCustomerCode();
     			String tempPerson = inl.get(i).getPersonCode();
     			String tempDate = inl.get(i).getDate();
-    			int j = 0;
-    			while(tempInvoiceCode.equals(inl.get(j).getCode())) {
-    				prodList.add(getProductFromDB(inl.get(j).getProductID()));
+    			int j = i;
+    			while(tempInvoiceCode.equals(inl.get(j).getCode()) && j<inl.size()-1) {
+    				prodList.add(getProductFromDB((inl.get(j).getProductID())));
     				quantList.add(""+inl.get(j).getQuantity());
-    				System.out.println(inl.get(j).getQuantity());
-    				j++;
+    				//System.out.println(""+inl.get(j).getQuantity());
+    				//System.out.println(getProductFromDB(inl.get(j).getProductID()));
+    				//System.out.println("j: "+j);
+    				j=j+1;
     			}
-    			i=j;
+    			if(i==inl.size()-1) {
+    				i=inl.size();
+    			}else {
+    				i = j-1;
+    			}
+    			//System.out.println("i: "+i);
+    			//System.out.println(tempInvoiceCode+" "+prodList+" "+quantList);
     			finalListToReturn.add(new Invoice(tempInvoiceCode, getCustomerFromDB(tempCust),
     					getPersonFromDB(tempPerson), tempDate, prodList, quantList));
     			
@@ -837,6 +850,7 @@ public class InvoiceData {
     			}
     			rs.close();
     			newCustomer = new Customer(customerCode, type, getPersonFromDB(person), name, getAddressFromDB(address));
+    			conn.close();
     		}catch(SQLException e) {
     			System.out.println("SQLException: ");
     			e.printStackTrace();
@@ -864,6 +878,7 @@ public class InvoiceData {
     			}
     			rs.close();
     			newPerson = new Person(personCode, firstName+" "+lastName, getAddressFromDB(addressID));
+    			conn.close();
     		}catch(SQLException e) {
     			System.out.println("SQLException: ");
     			e.printStackTrace();
@@ -895,6 +910,7 @@ public class InvoiceData {
     			}
     			rs.close();
     			newAddress = new Address(street, city, state, zip, country);
+    			conn.close();
     		}catch(SQLException e) {
     			System.out.println("SQLException: ");
     			e.printStackTrace();
@@ -913,16 +929,19 @@ public class InvoiceData {
     		double price=0;
     		Product newProduct;
     		try {
+    			//System.out.println("Price1: "+price);
     			PreparedStatement ps = conn.prepareStatement(query);
     			ps.setString(1, productCode);
     			ResultSet rs = ps.executeQuery();
-    			while(rs.next()) {
+    			if(rs.next()) {
     				type = rs.getString("ProductType");
     				name = rs.getString("ProductName");
     				price = rs.getDouble("Price");
+    				//System.out.println("Price2: "+price);
     			}
     			rs.close();
     			newProduct = new Product(productCode, type, price, name);
+    			conn.close();
     		}catch(SQLException e) {
     			System.out.println("SQLException: ");
     			e.printStackTrace();

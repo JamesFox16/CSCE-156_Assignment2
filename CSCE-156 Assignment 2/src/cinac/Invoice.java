@@ -182,7 +182,7 @@ public class Invoice {
 				taxRate = .06; //Ticket tax rate
 			}
 			
-			if(tempProduct.getProductType().equals("M")) { //Movie tickets
+			if(tempProduct instanceof MovieTicket ) { //Movie tickets
 				ticketHasBeenPurchased = true;
 				MovieTicket tempMovie = (MovieTicket)tempProduct;
 				boolean discountTF = dateDiscountChecker.isTuOrThurs(tempMovie.getDateTime());
@@ -375,7 +375,7 @@ public class Invoice {
 			}
 			if(tempProduct.getProductType().equals("M")) { //Movie tickets
 				ticketHasBeenPurchased = true;
-				MovieTicket tempMovie = (MovieTicket)tempProduct;
+				MovieTicket tempMovie = (MovieTicket)products.get(i);
 				boolean discountTF = dateDiscountChecker.isTuOrThurs(tempMovie.getDateTime());
 				if(discountTF) {
 					price = price * .93;//7% discount for date of purchase
