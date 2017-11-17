@@ -4,8 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.ceg.ext.DatabaseInfo;
+
+import cinac.Address;
+import cinac.Customer;
+import cinac.Invoice;
+import cinac.Person;
+import cinac.Product;;
 
 /*
  * This is a collection of utility methods that define a general API for
@@ -630,7 +637,7 @@ public class InvoiceData {
     }
     
     public static void addAddress(String street, String city, String state, String zip, String country) {
-    	String query = "INSERT INTO Address (Street, City, State, ZIP, Country) VALUES (?,?,?,?,?)";
+    		String query = "INSERT INTO Address (Street, City, State, ZIP, Country) VALUES (?,?,?,?,?)";
 		Connection conn = DatabaseInfo.getConnection();
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
@@ -648,5 +655,172 @@ public class InvoiceData {
 			throw new RuntimeException(e);
 		}
     }
+    
+    public static ArrayList<Invoice> getInvoiceList(){
+    		ArrayList<Invoice> inl = new ArrayList<Invoice>();
+    		ArrayList<Invoice> finalListToReturn = new ArrayList<Invoice>();
+    		String query = "SELECT InvoiceCode, CustomerID, PersonID, InvoiceDate, ProductID, Quantity FROM Invoice GROUP BY InvoiceCode";
+    		Connection conn = DatabaseInfo.getConnection(); 
+    		String invoiceCode ="";
+    		String customerCode = "";
+    		String personCode = "";
+    		String invoiceDate = "";
+    		String productID = "";
+    		int quantity = 0;
+    		try {
+    			PreparedStatement ps = conn.prepareStatement(query);
+    			ResultSet rs = ps.executeQuery();
+    			while(rs.next()) {
+    				invoiceCode = rs.getString("InvoiceCode");
+    				customerCode = rs.getString("CustomerID");
+    				personCode = rs.getString("PersonID");
+    				invoiceDate = rs.getString("InvoiceDate");
+    				productID = rs.getString("ProductID");
+    				quantity = rs.getInt("Quantity");
+    				Invoice in = new Invoice(invoiceCode, customerCode, personCode, invoiceDate, productID, quantity);
+    				inl.add(in);
+    			}
+    			rs.close();
+    			
+    		}catch(SQLException e) {
+    			System.out.println("SQLException: ");
+    			e.printStackTrace();
+    			throw new RuntimeException(e);
+    		}
+    		for(int i=0; i<inl.size(); i++) {
+    			ArrayList<Product> prodList = new ArrayList<Product>();
+    			ArrayList<String> quantList = new ArrayList<String>();
+    			String tempInvoiceCode = inl.get(i).getCode();
+    			int j = i;
+    			while(tempInvoiceCode.equals(inl.get(j).getCode())) {
+    				prodList.add(getProductFromDB(inl.get(j).getCode()));
+    				quantList.add(""+inl.get(j).getQuantity());
+    				j++;
+    			}
+    			i=j;
+    			finalListToReturn.add(new Invoice(invoiceCode, getCustomerFromDB(customerCode),
+    					getPersonFromDB(personCode), invoiceDate, prodList, quantList));
+    			
+    		}
+    		
+    		return finalListToReturn;
+    }
+    
+    public static Customer getCustomerFromDB(String customerCode) {
+    		String query = "SELECT CustomerType, CustomerName, PersonID, AddressID FROM Customer WHERE CustomerCode = ?";
+    		Connection conn = DatabaseInfo.getConnection();
+    		Customer newCustomer;
+    		String type = "";
+    		String name = "";
+    		String person = "";
+    		int address = 0;
+    		try {
+    			PreparedStatement ps = conn.prepareStatement(query);
+    			ps.setString(1, customerCode);
+    			ResultSet rs = ps.executeQuery();
+    			while (rs.next()) {
+    				type = rs.getString("CustomerType");
+    				name = rs.getString("CustomerName");
+    				person = rs.getString("PersonID");
+    				address = rs.getInt("AddressID");	
+    			}
+    			rs.close();
+    			newCustomer = new Customer(customerCode, type, getPersonFromDB(person), name, getAddressFromDB(address));
+    		}catch(SQLException e) {
+    			System.out.println("SQLException: ");
+    			e.printStackTrace();
+    			throw new RuntimeException(e);
+    		}
+    		
+    		return newCustomer;
+    }
+    
+    public static Person getPersonFromDB(String personCode) {
+    		String query = "SELECT FirstName, LastName, AddressID FROM Person WHERE PersonCode = ?";
+    		Connection conn = DatabaseInfo.getConnection();
+    		String firstName="";
+    		String lastName="";
+    		int addressID=0;
+    		Person newPerson;
+    		try {
+    			PreparedStatement ps = conn.prepareStatement(query);
+    			ps.setString(1, personCode);
+    			ResultSet rs = ps.executeQuery();
+    			while(rs.next()) {
+    				firstName = rs.getString("FirstName");
+    				lastName = rs.getString("LastName");
+    				addressID = rs.getInt("AddressID");
+    			}
+    			rs.close();
+    			newPerson = new Person(personCode, firstName+" "+lastName, getAddressFromDB(addressID));
+    		}catch(SQLException e) {
+    			System.out.println("SQLException: ");
+    			e.printStackTrace();
+    			throw new RuntimeException(e);
+    		}
+    		
+    		return newPerson;
+    }
+    
+    public static Address getAddressFromDB(int addressID) {
+    		String query = "SELECT Street, City, State, ZIP, Country FROM Address WHERE AddressID = ?";
+    		Connection conn = DatabaseInfo.getConnection();
+    		String street="";
+    		String city = "";
+    		String state ="";
+    		String zip = "";
+    		String country = "";
+    		Address newAddress;
+    		try {
+    			PreparedStatement ps = conn.prepareStatement(query);
+    			ps.setInt(1, addressID);
+    			ResultSet rs = ps.executeQuery();
+    			while(rs.next()) {
+    				street = rs.getString("Street");
+    				city = rs.getString("City");
+    				state = rs.getString("State");
+    				zip = ""+rs.getInt("ZIP");
+    				country = rs.getString("Country");
+    			}
+    			rs.close();
+    			newAddress = new Address(street, city, state, zip, country);
+    		}catch(SQLException e) {
+    			System.out.println("SQLException: ");
+    			e.printStackTrace();
+    			throw new RuntimeException(e);
+    		}
+    		
+    		return newAddress;
+    }
+    
+    
+    public static Product getProductFromDB(String productCode) {
+    		String query="SELECT ProductName, ProductType, Price FROM Product WHERE ProductCode = ?";
+    		Connection conn = DatabaseInfo.getConnection();
+    		String type="";
+    		String name="";
+    		double price=0;
+    		Product newProduct;
+    		try {
+    			PreparedStatement ps = conn.prepareStatement(query);
+    			ps.setString(1, productCode);
+    			ResultSet rs = ps.executeQuery();
+    			while(rs.next()) {
+    				type = rs.getString("ProductType");
+    				name = rs.getString("ProductName");
+    				price = rs.getDouble("Price");
+    			}
+    			rs.close();
+    			newProduct = new Product(productCode, type, price, name);
+    		}catch(SQLException e) {
+    			System.out.println("SQLException: ");
+    			e.printStackTrace();
+    			throw new RuntimeException(e);
+    		}
+    		return newProduct;
+    		
+    }
+    
+   
 
 }

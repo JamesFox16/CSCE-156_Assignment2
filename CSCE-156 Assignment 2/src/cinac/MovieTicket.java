@@ -1,3 +1,5 @@
+package cinac;
+
 
 public class MovieTicket extends Product{
 	private String dateTime;

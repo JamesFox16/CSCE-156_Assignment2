@@ -1,3 +1,5 @@
+package cinac;
+
 
 public class Student extends Customer {
 

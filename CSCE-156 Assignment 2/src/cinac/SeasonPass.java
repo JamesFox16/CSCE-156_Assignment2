@@ -1,3 +1,5 @@
+package cinac;
+
 
 public class SeasonPass extends Product{
 	private String passName;

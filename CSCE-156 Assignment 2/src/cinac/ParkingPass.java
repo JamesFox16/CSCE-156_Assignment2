@@ -1,3 +1,5 @@
+package cinac;
+
 
 public class ParkingPass extends Product{
 	

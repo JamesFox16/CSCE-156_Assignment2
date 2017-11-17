@@ -1,3 +1,5 @@
+package cinac;
+
 import java.util.Comparator;
 
 public class DiscountComparator implements Comparator<Invoice> {

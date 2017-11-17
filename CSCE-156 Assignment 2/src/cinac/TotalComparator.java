@@ -1,3 +1,5 @@
+package cinac;
+
 import java.util.Comparator;
 
 public class TotalComparator implements Comparator<Invoice> {

@@ -1,3 +1,5 @@
+package cinac;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,10 @@ public class Invoice {
 	private double theActualFinalSubTotalTotal=0;
 	private double theActualFinalFees=0;
 	private double theAcutalFinalDiscount=0;
+	private String customerCode;
+	private String personCode;
+	private String productID;
+	private int quantity;
 	
 	//Constructor for the invoice objects
 	public Invoice(String invoiceCode, Customer customer, Person salesPerson,
@@ -29,6 +35,25 @@ public class Invoice {
 		this.products = products;
 		this.quantityForProducts = quantityForProducts;
 		this.ticketCode = ticketCode;
+	}
+	
+	public Invoice(String invoiceCode, Customer customer, Person salesPerson,
+			String date, List<Product> products, List<String> quantityForProducts) {
+		this.invoiceCode = invoiceCode;
+		this.customer = customer;
+		this.salesPerson = salesPerson;
+		this.date = date;
+		this.products = products;
+		this.quantityForProducts = quantityForProducts;
+	}
+	
+	public Invoice(String invoiceCode, String customerCode, String personCode, String date, String productID, int quantity ) {
+		this.invoiceCode = invoiceCode;
+		this.customerCode = customerCode;
+		this.personCode = personCode;
+		this.date = date;
+		this.productID = productID;
+		this.quantity = quantity;
 	}
 	
 	//Simple Invoice
@@ -45,6 +70,10 @@ public class Invoice {
 		theAcutalFinalDiscount += temp.getDiscount();
 		
 	}
+	public int getQuantity() {
+		return this.quantity;
+	}
+	
 	
 	private String getSalesPersonName() {
 		return salesPerson.getFirstName();

@@ -1,3 +1,5 @@
+package cinac;
+
 import java.util.Calendar;
 
 public class DateDiscount {

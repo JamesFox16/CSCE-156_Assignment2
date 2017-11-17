@@ -1,3 +1,5 @@
+package cinac;
+
 
 public class Refreshments extends Product{
 	private String name;
