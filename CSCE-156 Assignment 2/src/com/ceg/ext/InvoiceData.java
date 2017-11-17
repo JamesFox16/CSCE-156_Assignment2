@@ -102,7 +102,7 @@ public class InvoiceData {
 			}else {
 				addressExists = false;
 			}
-			conn.close();
+			//conn.close();
 		}catch (SQLException e){
 			System.out.println("SQLException: ");
 			e.printStackTrace();
@@ -142,7 +142,7 @@ public class InvoiceData {
 				ResultSet rs = ps.executeQuery();
 				addressID = rs.getInt("AddressID");
 				//ps.close();
-				conn.close();
+				//conn.close();
 				
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
@@ -260,7 +260,7 @@ public class InvoiceData {
 			}else {
 				addressExists = false;
 			}
-			conn.close();
+			//conn.close();
 		}catch (SQLException e){
 			System.out.println("SQLException: ");
 			e.printStackTrace();
@@ -280,7 +280,7 @@ public class InvoiceData {
 			}else {
 				personExists = false;
 			}
-			conn.close();
+			//conn.close();
 		}catch (SQLException e){
 			System.out.println("SQLException: ");
 			e.printStackTrace();
@@ -327,7 +327,7 @@ public class InvoiceData {
 		}
 		
 		query = "TRUNCATE TABLE Product";
-		conn = DatabaseInfo.getConnection();
+		
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.executeUpdate();
@@ -337,7 +337,7 @@ public class InvoiceData {
 			throw new RuntimeException(e);
 		}
 		
-		conn = DatabaseInfo.getConnection();
+		
 		query = "SET FOREIGN_KEY_CHECKS=1";
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
@@ -513,7 +513,7 @@ public class InvoiceData {
 			while(rs.next()) {
 				addressID = rs.getInt("AddressID");
 			}
-			rs.close();
+			//rs.close();
 		}catch (SQLException e){
 			System.out.println("SQLException: ");
 			e.printStackTrace();
