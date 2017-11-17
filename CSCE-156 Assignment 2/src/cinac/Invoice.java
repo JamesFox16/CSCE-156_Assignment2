@@ -45,6 +45,7 @@ public class Invoice {
 		this.date = date;
 		this.products = products;
 		this.quantityForProducts = quantityForProducts;
+		//System.out.println(invoiceCode+" "+date);
 	}
 	
 	public Invoice(String invoiceCode, String customerCode, String personCode, String date, String productID, int quantity ) {
@@ -99,6 +100,31 @@ public class Invoice {
 	}
 	
 	
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getCustomerCode() {
+		return customerCode;
+	}
+
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
+	}
+
+	public String getPersonCode() {
+		return personCode;
+	}
+
+	public void setPersonCode(String personCode) {
+		this.personCode = personCode;
+	}
+
 	//Help Format
 	@Override
 	public String toString() {
@@ -137,11 +163,11 @@ public class Invoice {
 		for(int i=0; i<products.size(); i++) {
 			
 			//Check for free Parking Pass
-			if(ticketCode.get(i) != null) {
-				ticketParkingConnection = true;
-			}else {
-				ticketParkingConnection = false;
-			}
+//			if(ticketCode.get(i) != null) {
+//				ticketParkingConnection = true;
+//			}else {
+//				ticketParkingConnection = false;
+//			}
 			
 			Product tempProduct = products.get(i);
 			double price = tempProduct.getProductPrice();
@@ -311,5 +337,84 @@ public class Invoice {
 			totalTotal += 6.75;
 		}
 		return totalTotal;
+	}
+	
+	public void wordlessString() {
+		double totalTotal=0;
+		double totalSubTotal=0;
+		double totalTax = 0;
+		double taxRate;
+		double discount = 0;
+		boolean ticketHasBeenPurchased = false;
+		boolean ticketParkingConnection = false;
+		if(this.customer.getType().equals("S")) {
+			taxRate = 0;
+		}else {
+			taxRate = .04;
+		}
+		DateDiscount dateDiscountChecker = new DateDiscount();
+		for(int i=0; i<products.size(); i++) {
+			
+//			//Check for free Parking Pass
+//			if(ticketCode.get(i) != null) {
+//				ticketParkingConnection = true;
+//			}else {
+//				ticketParkingConnection = false;
+//			}
+			Product tempProduct = products.get(i);
+			double price = tempProduct.getProductPrice();
+			int tempInt = Integer.parseInt(quantityForProducts.get(i));
+			// Checking to see if the tax rate applys in specific cases.
+			if((tempProduct.getProductType().equals("M") || tempProduct.getProductType().equals("P")) 
+					&& this.customer.getType().equals("G")) {
+				taxRate = .06; //Ticket tax rate
+			}
+			if(tempProduct.getProductType().equals("M")) { //Movie tickets
+				ticketHasBeenPurchased = true;
+				MovieTicket tempMovie = (MovieTicket)tempProduct;
+				boolean discountTF = dateDiscountChecker.isTuOrThurs(tempMovie.getDateTime());
+				if(discountTF) {
+					price = price * .93;//7% discount for date of purchase
+				}
+				double tempSubTotal = price * tempInt;
+				double tempTax = tempSubTotal * taxRate;
+				double tempTotal = tempSubTotal + tempTax;
+				totalTotal += tempTotal;
+				totalSubTotal += tempSubTotal;
+				totalTax += tempTax;
+			}else if(tempProduct.getProductType().equals("R") && ticketHasBeenPurchased) {
+				price = price * .95;//5% discount for pre-ordering
+				double tempSubTotal = price * tempInt;
+				double tempTax = tempSubTotal * taxRate;
+				double tempTotal = tempSubTotal + tempTax;
+				totalTotal += tempTotal;
+				totalSubTotal += tempSubTotal;
+				totalTax += tempTax;
+			}else if(ticketParkingConnection) {//Free parking passes for ticket purchases
+				double tempSubTotal =0;
+				double tempTax = tempSubTotal * taxRate;
+				double tempTotal = 0;
+				totalTotal += tempTotal;
+				totalSubTotal += tempSubTotal;
+				totalTax += tempTax;
+			}else {
+				double tempSubTotal = price * tempInt;
+				double tempTax = tempSubTotal * taxRate;
+				double tempTotal = tempSubTotal + tempTax;
+				totalTotal += tempTotal;
+				totalSubTotal += tempSubTotal;
+				totalTax += tempTax;
+			}
+		}
+		// Output for the student discount and one time fee.
+		if (this.customer.getType().equals("S")) {
+			discount = totalTotal *.08;
+			totalTotal = totalTotal - discount;
+			totalTotal += 6.75;
+		}
+		//List to be used for Summary Report
+				InvoiceSummary tempSum = new InvoiceSummary(this.invoiceCode, this.customer.getName(), this.salesPerson.getFirstName(), 
+						totalSubTotal, this.customer.addFees(), totalTax, discount, totalTotal);
+				inSum.add(tempSum);
 	}
 }

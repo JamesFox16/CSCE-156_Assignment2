@@ -3,16 +3,33 @@ package cinac;
 import java.io.IOException;
 import java.util.List;
 
+import com.ceg.ext.InvoiceData;
+
 public class InvoiceReport {
 
 	public static void main(String[] args) throws IOException {
 		
 		//Create needed lists
-		FlatFileReader ffr = new FlatFileReader();
-		List<Person> per = ffr.createPersonList();
-		List<Customer> cust = ffr.createCustomerList();
-		List<Product> pro = ffr.createProductList();
-		List<Invoice> invoice = ffr.createInvoiceList();
+//		FlatFileReader ffr = new FlatFileReader();
+//		List<Person> per = ffr.createPersonList();
+//		List<Customer> cust = ffr.createCustomerList();
+//		List<Product> pro = ffr.createProductList();
+		List<Invoice> invoice = InvoiceData.getInvoiceList();
+		
+//		System.out.println(invoice.size());
+		
+		for(int i=0; i<invoice.size(); i++) {
+//			System.out.println(invoice.get(i).getCode());
+			invoice.get(i).wordlessString();
+		}//Create LinkedList
+		InvoiceList il = new InvoiceList();
+		
+		//Add Invoices to list
+		for(int i=0; i<invoice.size(); i++) {
+			il.insertEnd(invoice.get(i));
+		}
+		
+		//il.printNodes();
 		
 		//Display Detailed Reports
 		if(invoice != null) {
@@ -28,8 +45,8 @@ public class InvoiceReport {
 		//Summary Head
 		System.out.printf("%-10s %-30s %-20s %-10s %-10s %-10s %-10s %-10s\n", "Invoice", "Customer", "Salesperson", "Subtotal", "Fees", "Tax", "Discount", "Total");
 
-		for(int i=0; i<invoice.size(); i++) {
-			invoice.get(i).summary(0);
+		for(int i=2; i<=il.getSize(); i++) {
+			il.getInvoice(i).summary(0);
 		}
 		double totalTotal=0;
 		double totalTax=0;

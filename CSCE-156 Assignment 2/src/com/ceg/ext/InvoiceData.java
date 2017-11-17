@@ -12,7 +12,7 @@ import cinac.Address;
 import cinac.Customer;
 import cinac.Invoice;
 import cinac.Person;
-import cinac.Product;;
+import cinac.Product;
 
 /*
  * This is a collection of utility methods that define a general API for
@@ -678,6 +678,8 @@ public class InvoiceData {
     				productID = rs.getString("ProductID");
     				quantity = rs.getInt("Quantity");
     				Invoice in = new Invoice(invoiceCode, customerCode, personCode, invoiceDate, productID, quantity);
+//    				System.out.println(invoiceCode);
+//    				System.out.println(invoiceDate);
     				inl.add(in);
     			}
     			rs.close();
@@ -691,15 +693,18 @@ public class InvoiceData {
     			ArrayList<Product> prodList = new ArrayList<Product>();
     			ArrayList<String> quantList = new ArrayList<String>();
     			String tempInvoiceCode = inl.get(i).getCode();
-    			int j = i;
+    			String tempCust = inl.get(i).getCustomerCode();
+    			String tempPerson = inl.get(i).getPersonCode();
+    			String tempDate = inl.get(i).getDate();
+    			int j = 0;
     			while(tempInvoiceCode.equals(inl.get(j).getCode())) {
     				prodList.add(getProductFromDB(inl.get(j).getCode()));
     				quantList.add(""+inl.get(j).getQuantity());
     				j++;
     			}
-    			i=j;
-    			finalListToReturn.add(new Invoice(invoiceCode, getCustomerFromDB(customerCode),
-    					getPersonFromDB(personCode), invoiceDate, prodList, quantList));
+    			//i=j;
+    			finalListToReturn.add(new Invoice(tempInvoiceCode, getCustomerFromDB(tempCust),
+    					getPersonFromDB(tempPerson), tempDate, prodList, quantList));
     			
     		}
     		

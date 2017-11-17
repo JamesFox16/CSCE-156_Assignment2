@@ -27,6 +27,17 @@ public class InvoiceList {
 		return size;
 	}
 	
+	public Invoice getInvoice(int index) {
+		InvoiceNode node = start;
+		if(index==1) {
+			return node.getInvoice();
+		}else
+			for(int i=1;i<index-1;i++) {
+				node = node.getNext();
+			}
+		return node.getInvoice();
+	}
+	
 	public void insertStart(Invoice i) {
 		InvoiceNode node = new InvoiceNode(i);
 		size++;
