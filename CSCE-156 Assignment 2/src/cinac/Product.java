@@ -20,6 +20,7 @@ public class Product {
 		this.productCode = productCode;
 		this.productType = productType;
 		this.price = unitPrice;
+		this.name = name;
 	}
 	
 	public double computeTax() {

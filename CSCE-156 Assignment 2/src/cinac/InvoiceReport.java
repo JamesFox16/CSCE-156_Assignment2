@@ -7,14 +7,8 @@ import com.ceg.ext.InvoiceData;
 
 public class InvoiceReport {
 
-	public static void main(String[] args) throws IOException {
-		//InvoiceData.removeAllInvoices();
-		//Create needed lists
-//		FlatFileReader ffr = new FlatFileReader();
-//		List<Person> per = ffr.createPersonList();
-//		List<Customer> cust = ffr.createCustomerList();
-//		List<Product> pro = ffr.createProductList();
-		List<Invoice> invoice = InvoiceData.getInvoiceList();
+	public static void execute() {
+List<Invoice> invoice = InvoiceData.getInvoiceList();
 		
 //		System.out.println(invoice.size());
 		
@@ -68,6 +62,7 @@ public class InvoiceReport {
 		System.out.println("=====================================================================================================================");
 		System.out.printf("%-60s $%-10.2f $%-10.2f $%-10.2f -$%-10.2f $%-10.2f\n", "TOTAL:", totalSubTotal, totalFees,
 				totalTax, totalDiscount, totalTotal);
+	
 	}
-
+	
 }

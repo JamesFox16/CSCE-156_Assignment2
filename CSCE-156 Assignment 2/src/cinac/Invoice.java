@@ -124,6 +124,10 @@ public class Invoice {
 	public void setPersonCode(String personCode) {
 		this.personCode = personCode;
 	}
+	
+	public String getProductID() {
+		return this.productID;
+	}
 
 	//Help Format
 	@Override

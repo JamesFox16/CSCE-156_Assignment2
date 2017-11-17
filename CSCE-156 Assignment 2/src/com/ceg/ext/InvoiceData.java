@@ -140,7 +140,9 @@ public class InvoiceData {
 				ps.setString(2, city);
 				ps.setString(3, state);
 				ResultSet rs = ps.executeQuery();
-				addressID = rs.getInt("AddressID");
+				while(rs.next()) {
+					addressID = rs.getInt("AddressID");
+				}
 				//ps.close();
 				//conn.close();
 				
@@ -503,7 +505,7 @@ public class InvoiceData {
 	 * 11. Adds an invoice record to the database with the given data.
 	 */
 	public static void addInvoice(String invoiceCode, String customerCode, String salesPersonCode, String invoiceDate) {
-		String query = "SELECT AddressID FROM Person WHERE PersonCode = ?";
+		String query = "SELECT AddressID FROM Person WHERE PersonID = ?";
 		Connection conn = DatabaseInfo.getConnection();
 		int addressID=0;
 		try {
@@ -519,7 +521,7 @@ public class InvoiceData {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		query = "INSERT INTO Invoice (InvoiceCode, InvoiceDate, AddressID, CustomerID, PersonID)";
+		query = "INSERT INTO Invoice (InvoiceCode, InvoiceDate, AddressID, CustomerID, PersonID) values (?,?,?,?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setString(1, invoiceCode);
@@ -544,7 +546,7 @@ public class InvoiceData {
 	 */
 
 	public static void addMovieTicketToInvoice(String invoiceCode, String productCode, int quantity) {
-		String query = "SELECT AdressID, CustomerID, PersonID, InvoiceDate FROM Invoice WHERE InvoiceCode = ?";
+		String query = "SELECT AddressID, CustomerID, PersonID, InvoiceDate FROM Invoice WHERE InvoiceCode = ?";
 		Connection conn = DatabaseInfo.getConnection();
 		int addressID=0;
 		String customerID="";
@@ -555,7 +557,7 @@ public class InvoiceData {
 			ps.setString(1, invoiceCode);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				addressID = rs.getInt("AdressID");
+				addressID = rs.getInt("AddressID");
 				customerID = rs.getString("CustomerID");
 				personID = rs.getString("PersonID");
 				invoiceDate = rs.getString("InvoiceDate");
@@ -596,7 +598,7 @@ public class InvoiceData {
 	 * the given begin/end dates
 	 */
 	public static void addSeasonPassToInvoice(String invoiceCode, String productCode, int quantity) {
-		String query = "SELECT AdressID, CustomerID, PersonID, InvoiceDate FROM Invoice WHERE InvoiceCode = ?";
+		String query = "SELECT AddressID, CustomerID, PersonID, InvoiceDate FROM Invoice WHERE InvoiceCode = ?";
 		Connection conn = DatabaseInfo.getConnection();
 		int addressID=0;
 		String customerID="";
@@ -607,7 +609,7 @@ public class InvoiceData {
 			ps.setString(1, invoiceCode);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				addressID = rs.getInt("AdressID");
+				addressID = rs.getInt("AddressID");
 				customerID = rs.getString("CustomerID");
 				personID = rs.getString("PersonID");
 				invoiceDate = rs.getString("InvoiceDate");
@@ -647,7 +649,7 @@ public class InvoiceData {
      * NOTE: ticketCode may be null
      */
     public static void addParkingPassToInvoice(String invoiceCode, String productCode, int quantity, String ticketCode) {
-    	String query = "SELECT AdressID, CustomerID, PersonID, InvoiceDate FROM Invoice WHERE InvoiceCode = ?";
+    	String query = "SELECT AddressID, CustomerID, PersonID, InvoiceDate FROM Invoice WHERE InvoiceCode = ?";
 		Connection conn = DatabaseInfo.getConnection();
 		int addressID=0;
 		String customerID="";
@@ -658,7 +660,7 @@ public class InvoiceData {
 			ps.setString(1, invoiceCode);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				addressID = rs.getInt("AdressID");
+				addressID = rs.getInt("AddressID");
 				customerID = rs.getString("CustomerID");
 				personID = rs.getString("PersonID");
 				invoiceDate = rs.getString("InvoiceDate");
@@ -697,7 +699,7 @@ public class InvoiceData {
      * number of quantity. 
      */
     public static void addRefreshmentToInvoice(String invoiceCode, String productCode, int quantity) {
-    	String query = "SELECT AdressID, CustomerID, PersonID, InvoiceDate FROM Invoice WHERE InvoiceCode = ?";
+    	String query = "SELECT AddressID, CustomerID, PersonID, InvoiceDate FROM Invoice WHERE InvoiceCode = ?";
 		Connection conn = DatabaseInfo.getConnection();
 		int addressID=0;
 		String customerID="";
@@ -708,7 +710,7 @@ public class InvoiceData {
 			ps.setString(1, invoiceCode);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				addressID = rs.getInt("AdressID");
+				addressID = rs.getInt("AddressID");
 				customerID = rs.getString("CustomerID");
 				personID = rs.getString("PersonID");
 				invoiceDate = rs.getString("InvoiceDate");
@@ -783,8 +785,6 @@ public class InvoiceData {
     				productID = rs.getString("ProductID");
     				quantity = rs.getInt("Quantity");
     				Invoice in = new Invoice(invoiceCode, customerCode, personCode, invoiceDate, productID, quantity);
-//    				System.out.println(invoiceCode);
-//    				System.out.println(invoiceDate);
     				inl.add(in);
     			}
     			rs.close();
@@ -803,11 +803,12 @@ public class InvoiceData {
     			String tempDate = inl.get(i).getDate();
     			int j = 0;
     			while(tempInvoiceCode.equals(inl.get(j).getCode())) {
-    				prodList.add(getProductFromDB(inl.get(j).getCode()));
+    				prodList.add(getProductFromDB(inl.get(j).getProductID()));
     				quantList.add(""+inl.get(j).getQuantity());
+    				System.out.println(inl.get(j).getQuantity());
     				j++;
     			}
-    			//i=j;
+    			i=j;
     			finalListToReturn.add(new Invoice(tempInvoiceCode, getCustomerFromDB(tempCust),
     					getPersonFromDB(tempPerson), tempDate, prodList, quantList));
     			
@@ -817,7 +818,7 @@ public class InvoiceData {
     }
     
     public static Customer getCustomerFromDB(String customerCode) {
-    		String query = "SELECT CustomerType, CustomerName, PersonID, AddressID FROM Customer WHERE CustomerCode = ?";
+    		String query = "SELECT CustomerType, CustomerName, PersonID, AddressID FROM Customer WHERE CustomerID = ?";
     		Connection conn = DatabaseInfo.getConnection();
     		Customer newCustomer;
     		String type = "";
@@ -846,7 +847,7 @@ public class InvoiceData {
     }
     
     public static Person getPersonFromDB(String personCode) {
-    		String query = "SELECT FirstName, LastName, AddressID FROM Person WHERE PersonCode = ?";
+    		String query = "SELECT FirstName, LastName, AddressID FROM Person WHERE PersonID = ?";
     		Connection conn = DatabaseInfo.getConnection();
     		String firstName="";
     		String lastName="";
@@ -905,7 +906,7 @@ public class InvoiceData {
     
     
     public static Product getProductFromDB(String productCode) {
-    		String query="SELECT ProductName, ProductType, Price FROM Product WHERE ProductCode = ?";
+    		String query="SELECT ProductName, ProductType, Price FROM Product WHERE ProductID = ?";
     		Connection conn = DatabaseInfo.getConnection();
     		String type="";
     		String name="";
@@ -930,7 +931,5 @@ public class InvoiceData {
     		return newProduct;
     		
     }
-    
-   
 
 }
