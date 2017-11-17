@@ -8,7 +8,7 @@ import com.ceg.ext.InvoiceData;
 public class InvoiceReport {
 
 	public static void main(String[] args) throws IOException {
-		
+		InvoiceData.removeAllInvoices();
 		//Create needed lists
 //		FlatFileReader ffr = new FlatFileReader();
 //		List<Person> per = ffr.createPersonList();

@@ -28,8 +28,20 @@ public class InvoiceData {
 	 * 1. Method that removes every person record from the database
 	 */
 	public static void removeAllPersons() {
-		String query = "DELETE * FROM Person";
+		String query = "SET FOREIGN_KEY_CHECKS=0";
 		Connection conn = DatabaseInfo.getConnection();
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.executeUpdate(query);
+			ps.close();
+			conn.close();
+		}catch (SQLException e){
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		query = "TRUNCATE TABLE Person";
+		
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.executeUpdate();
@@ -38,6 +50,18 @@ public class InvoiceData {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+		query =  "SET FOREIGN_KEY_CHECKS=1";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.executeUpdate();
+			ps.close();
+			conn.close();
+		}catch (SQLException e){
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 	/**
@@ -174,7 +198,7 @@ public class InvoiceData {
 	 * 4. Method that removes every customer record from the database
 	 */
 	public static void removeAllCustomers() {
-		String query = "DELETE * FROM Customer";
+		String query = "TRUNCATE TABLE Customer";
 		Connection conn = DatabaseInfo.getConnection();
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
@@ -263,7 +287,7 @@ public class InvoiceData {
 	 * 5. Removes all product records from the database
 	 */
 	public static void removeAllProducts() {
-		String query = "DELETE * FROM Product";
+		String query = "TRUNCATE TABLE Product";
 		Connection conn = DatabaseInfo.getConnection();
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
@@ -380,11 +404,40 @@ public class InvoiceData {
 	 * 10. Removes all invoice records from the database
 	 */
 	public static void removeAllInvoices() {
-		String query = "DELETE * FROM Invoice";
+		//removeAllProducts();
+	//	removeAllPersons();
+		//removeAllCustomers();
 		Connection conn = DatabaseInfo.getConnection();
+		String query = "SET FOREIGN_KEY_CHECKS=0";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.executeUpdate(query);
+			ps.close();
+			
+		}catch (SQLException e){
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		
+		query = "TRUNCATE TABLE Invoice";
+		
 		try {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.executeUpdate();
+			ps.close();
+			
+		}catch (SQLException e){
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		query = "SET FOREIGN_KEY_CHECKS=1";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.executeUpdate(query);
 			ps.close();
 			conn.close();
 		}catch (SQLException e){
