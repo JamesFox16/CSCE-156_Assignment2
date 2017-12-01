@@ -125,6 +125,7 @@ public class InvoiceList {
 	public void sortedInsertion(Invoice i) {//Currently sorts by total
 		if(start==null) {
 			this.insertStart(i);
+			return;
 		}
 		InvoiceNode node = start;
 		if(i.calculateTotal() > start.getInvoice().calculateTotal()) {

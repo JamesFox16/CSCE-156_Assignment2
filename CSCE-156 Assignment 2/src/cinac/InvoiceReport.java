@@ -1,36 +1,33 @@
 package cinac;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 import com.ceg.ext.InvoiceData;
 
 public class InvoiceReport {
 
 	public static void execute() {
-List<Invoice> invoice = InvoiceData.getInvoiceList();
 		
-//		System.out.println(invoice.size());
+		List<Invoice> invoice = InvoiceData.getInvoiceList();
+		List<Invoice> inv2 = new ArrayList<Invoice>();
 		
-		for(int i=0; i<invoice.size(); i++) {
-//			System.out.println(invoice.get(i).getCode());
-			//invoice.get(i);//.wordlessString();
-		}//Create LinkedList
 		InvoiceList il = new InvoiceList();
+		
+		invoice.get(1).wordlessString();
 		
 		//Add Invoices to list
 		for(int i=0; i<invoice.size(); i++) {
-			il.insertEnd(invoice.get(i));
+			il.sortedInsertion(invoice.get(i));
 		}
-		
-		//il.printNodes();
+		for(int i=2;i<il.getSize()+1;i++) {
+			inv2.add(il.getInvoice(i));
+		}
+		il.printNodes();
 		
 		//Display Detailed Reports
-		if(invoice != null) {
-			invoice.toString();
-		}else {
-			System.out.println("?");
-		}
+		inv2.toString();
+		
 		
 		
 		System.out.println("===================================");

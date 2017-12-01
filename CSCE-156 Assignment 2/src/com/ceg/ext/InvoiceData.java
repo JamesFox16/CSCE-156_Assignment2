@@ -751,7 +751,11 @@ public class InvoiceData {
 			ps.setString(1, street);
 			ps.setString(2, city);
 			ps.setString(3, state);
+			try {
 			ps.setInt(4, Integer.parseInt(zip));
+			}catch(NumberFormatException e) {
+				ps.setInt(4, 0);
+			}
 			ps.setString(5, country);
 			ps.executeUpdate();
 			ps.close();

@@ -284,11 +284,11 @@ public class Invoice {
 		for(int i=0; i<products.size(); i++) {
 			
 			//Check for free Parking Pass
-			if(ticketCode.get(i) != null) {
-				ticketParkingConnection = true;
-			}else {
-				ticketParkingConnection = false;
-			}
+//			if(ticketCode.get(i) != null) {
+//				ticketParkingConnection = true;
+//			}else {
+//				ticketParkingConnection = false;
+//			}
 			Product tempProduct = products.get(i);
 			double price = tempProduct.getProductPrice();
 			int tempInt = Integer.parseInt(quantityForProducts.get(i));
@@ -298,12 +298,12 @@ public class Invoice {
 				taxRate = .06; //Ticket tax rate
 			}
 			if(tempProduct.getProductType().equals("M")) { //Movie tickets
-				ticketHasBeenPurchased = true;
-				MovieTicket tempMovie = (MovieTicket)tempProduct;
-				boolean discountTF = dateDiscountChecker.isTuOrThurs(tempMovie.getDateTime());
-				if(discountTF) {
-					price = price * .93;//7% discount for date of purchase
-				}
+//				ticketHasBeenPurchased = true;
+//				MovieTicket tempMovie = (MovieTicket)tempProduct;
+//				boolean discountTF = dateDiscountChecker.isTuOrThurs(tempMovie.getDateTime());
+//				if(discountTF) {
+//					price = price * .93;//7% discount for date of purchase
+//				}
 				double tempSubTotal = price * tempInt;
 				double tempTax = tempSubTotal * taxRate;
 				double tempTotal = tempSubTotal + tempTax;
@@ -374,12 +374,12 @@ public class Invoice {
 				taxRate = .06; //Ticket tax rate
 			}
 			if(tempProduct.getProductType().equals("M")) { //Movie tickets
-				ticketHasBeenPurchased = true;
-				MovieTicket tempMovie = (MovieTicket)products.get(i);
-				boolean discountTF = dateDiscountChecker.isTuOrThurs(tempMovie.getDateTime());
-				if(discountTF) {
-					price = price * .93;//7% discount for date of purchase
-				}
+//				ticketHasBeenPurchased = true;
+//				MovieTicket tempMovie = (MovieTicket)products.get(i);
+//				boolean discountTF = dateDiscountChecker.isTuOrThurs(tempMovie.getDateTime());
+//				if(discountTF) {
+//					price = price * .93;//7% discount for date of purchase
+//				}
 				double tempSubTotal = price * tempInt;
 				double tempTax = tempSubTotal * taxRate;
 				double tempTotal = tempSubTotal + tempTax;
